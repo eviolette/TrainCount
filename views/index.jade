@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  head
+    script(type='text/javascript').
+      function pageNext() {
+          window.location.href = '/inputpage'
+          updateName(document.getElementById("counter-id").innerHTML);
+      }
+      function updateName(str) {
+
+      }
+  body
+    h1 Basic Information
+    p Welcome to #{title}
+    form(action='survey.cgi', method='POST')
+      | Date:
+      input(type='text', id='data', size='8', maxlength='8', value='XX/XX/XX')
+      br
+      | Counter Name:
+      input(type='text', id='counter-name', size='20', maxlength='40', value='')
+      br
+      | Counter ID:
+      input(type='text', id='counter-id', size='3', maxlength='5', value='')
+      br
+      | Assigned Car:
+      input(type='text', id='assgn-car', size='10', maxlength='20', value='')
+      br
+      | Train Car Serial Number:
+      input(type='text', id='train-serial-id', size='3', maxlength='5', value='')
+      br
+      | Train Line:
+      input(type='text', id='train-line', size='5', maxlength='10', value='')
+      br
+      | Number of Train Cars:
+      input(type='text', id='num-cars', size='2', maxlength='2', value='')
+      br
+      | Actual Departure Time (using 24hr format):
+      input(type='text', name='NumCars', size='5', maxlength='5', value='XX:XX')
+      br
+      | Actual Arrival Time (using 24hr format):
+      input(type='text', name='NumCars', size='5', maxlength='5', value='XX:XX')
+      br
+      button(type='button', id='Next', onclick='pageNext()') Submit

@@ -1,0 +1,21 @@
+//
+   Created by eviolette on 6/22/17.
+
+extends layout
+
+block content
+    h1= title
+    p Test
+    head
+        script(type='text/javascript').
+            function pageNext() {
+                window.location.href = '/inputpage'
+            }
+            function done() {
+                window.location.href = '/submit_completed'
+            }
+
+    body
+        input(type='text')
+        button(type='button', id='submit page', onclick='pageNext()') Enter Data
+        button(type='button', id='done', onclick='done()') Done Entering Data
