@@ -1,0 +1,43 @@
+<h2 class="page-header">Home</h2>
+<body>Basic Information
+  <form (submit)="onLineSubmit()">
+    <div class="form-group">
+      <label>Date (XX/XX/XX): </label>
+      <input type="text" [(ngModel)]="date"  name="date"  class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label>Counter Name: </label>
+      <input type="text" [(ngModel)] = "counter_name" name="counter-name" class="form-control" maxlength="40"/>
+    </div>
+    <div class="form-group">
+      <label>Counter Id: </label>
+      <input type="text" [(ngModel)] = "counter_id" name="counter-id" class="form-control" maxlength="5"/>
+    </div>
+    <div class="form-group">
+      <label>Assigned Car: </label>
+      <input type="text" [(ngModel)] = "assigned_car" name="assigned-car" class="form-control" maxlength="20"/>
+    </div>
+    <div class="form-group">
+      <label>Train Car Serial Number: </label>
+      <input type="text" [(ngModel)] = "serial_num" name="serial-num" class="form-control" maxlength="5"/>
+    </div>
+    <div class="form-group">
+      <label>Train Line: </label>
+      <input type="text" [(ngModel)] = "train_line" name="train-line" class="form-control" maxlength="10"/>
+    </div>
+    <div class="form-group">
+      <label>Number of Train Cars: </label>
+      <input type="text" [(ngModel)] = "num_cars" name="num-cars" class="form-control" maxlength="5"/>
+    </div>
+    <div class="form-group">
+      <label>Actual Departure Time (using 24hr format): </label>
+      <input type="text" [(ngModel)] = "dept_time" name="dept-time" class="form-control" maxlength="5"/>
+    </div>
+    <div class="form-group">
+      <label>Actual Arrival Time (using 24hr format): </label>
+      <input type="text" [(ngModel)] = "arrival_time" name="arrival-time" class="form-control" maxlength="5"/>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Submit">
+  </form>
+</body>
+

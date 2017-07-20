@@ -4,9 +4,34 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cors = require('cors');
+var passport = require('passport');
+var mongoose = require('mongoose');
+var config = require('./config/database');
 
-var index = require('./routes/index');
+mongoose.connect(config.database);
+
+
+
+// Confirm Mongodb Connection
+mongoose.connection.on('connected', function() {
+    console.log('Connected to db');
+});
+
+// On Error
+mongoose.connection.on('error', function(err) {
+    console.log('Database error: ' + err);
+});
+
+
+
+
+//var index = require('./routes/index');
 var users = require('./routes/users');
+var trainlines = require('./routes/trainlines');
+var counts = require('./routes/counts');
+
+
 
 var app = express();
 
@@ -16,14 +41,29 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+
+// MIDDLEWARE
+app.use(cors());
+
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+require ('./config/passport')(passport);
+
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+
+//app.use('/', index);
 app.use('/users', users);
+app.use('/trainlines', trainlines);
+app.use('/counts', counts);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

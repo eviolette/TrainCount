@@ -6,3 +6,7 @@ extends layout
 block content
     h1= title
     p Form Submitted.
+    body
+        form(id='ret', method='GET', action='/')
+            input(type='submit', value='Return to Home')
+

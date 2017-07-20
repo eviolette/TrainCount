@@ -1,0 +1,29 @@
+<h2>Input Count Data</h2>
+<h4>{{header}}</h4>
+<body>
+  <div class="container">
+    <form (submit)="onCountSubmit()">
+      <table class=".table-hover">
+        <thead>
+          <tr>
+            <th>Departure Time</th>
+            <th>Station Name</th>
+            <th>On Count</th>
+            <th>Off Count</th>
+            <th>Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" [(ngModel)]="dept1" name="time1" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="station1" name="station1" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="on1" name="on1"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="off1" name="off1" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments1" name="comments1" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+        </tbody>
+      </table>
+      <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+  </div>
+</body>
