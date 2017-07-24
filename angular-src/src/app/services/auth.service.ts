@@ -55,7 +55,7 @@ export class AuthService {
   }
 
   loggedIn() {
-    return tokenNotExpired;
+    return tokenNotExpired('id_token');
   }
 
   logout(){
@@ -68,34 +68,56 @@ export class AuthService {
   registerLine(line) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/trainlines/register', line, {headers: headers})
+    return this.http.post('http://localhost:3000/lines/register', line, {headers: headers})
       .map(res=>res.json());
   }
 
   getLine() {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/trainlines/lineInfo',{headers: headers})
+    return this.http.get('http://localhost:3000/lines/lineInfo',{headers: headers})
       .map(res => res.json());
   }
 
   // Count Methods
-  getRowInfo(lineNum) {
+  getDeptInfo(lineNum) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     let params: URLSearchParams = new URLSearchParams();
     params.set('line', lineNum);
     let options = new RequestOptions();
     options.search = params;
-    return this.http.get('http://localhost:3000/counts/row/' + lineNum, {headers: headers})
+    return this.http.get('http://localhost:3000/counts/departures/' + lineNum, {headers: headers})
+      .map(res => res.json());
+  }
+
+  getStationInfo(lineNum) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/counts/stations/' + lineNum, {headers: headers})
+      .map(res => res.json());
+  }
+
+  getStationKey(station) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/newcounts/stationtime/' + station, {headers: headers})
       .map(res => res.json());
   }
 
   updateCount(count) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/counts/update', count, {headers: headers})
+    return this.http.post('http://localhost:3000/newcounts/updatecount', count, {headers: headers})
       .map(res=>res.json());
+  }
+
+
+  // Export Methods
+
+  exportCounts() {
+    let headers = new Headers();
+    return this.http.get('http://localhost:3000/newcounts/exportcount', {headers: headers})
   }
 
 }

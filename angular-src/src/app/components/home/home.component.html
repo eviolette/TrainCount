@@ -1,9 +1,34 @@
 <h2 class="page-header">Home</h2>
+<head>
+  <link rel="stylesheet" href="https://rawgit.com/g00fy-/angular-datepicker/master/dist/angular-datepicker.css">
+</head>
 <body>Basic Information
   <form (submit)="onLineSubmit()">
     <div class="form-group">
-      <label>Date (XX/XX/XX): </label>
-      <input type="text" [(ngModel)]="date"  name="date"  class="form-control"/>
+      <label>Train Line: </label>
+      <select [(ngModel)] = "train_line" name="train-line" class="form-control">
+        <option value="01">Elec - SC</option>
+        <option value="04">Elec - BI</option>
+        <option value="05">Elec - ML</option>
+        <option value="06">RI</option>
+        <option value="08">SWS</option>
+        <option value="09">HER</option>
+        <option value="10">BNSF</option>
+        <option value="11">UPW</option>
+        <option value="12">MDW</option>
+        <option value="13">UPNW</option>
+        <option value="15">MDN</option>
+        <option value="16">NCS</option>
+        <option value="17">UPN</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Train Number: </label>
+      <input type="text" [(ngModel)] = "train_num" name="train-num" class="form-control" maxlength="10"/>
+    </div>
+    <div class="form-group">
+      <label>Date: </label>
+      <input type="date" [(ngModel)]="date"  name="date"  class="form-control">
     </div>
     <div class="form-group">
       <label>Counter Name: </label>
@@ -22,20 +47,16 @@
       <input type="text" [(ngModel)] = "serial_num" name="serial-num" class="form-control" maxlength="5"/>
     </div>
     <div class="form-group">
-      <label>Train Line: </label>
-      <input type="text" [(ngModel)] = "train_line" name="train-line" class="form-control" maxlength="10"/>
-    </div>
-    <div class="form-group">
       <label>Number of Train Cars: </label>
       <input type="text" [(ngModel)] = "num_cars" name="num-cars" class="form-control" maxlength="5"/>
     </div>
     <div class="form-group">
-      <label>Actual Departure Time (using 24hr format): </label>
-      <input type="text" [(ngModel)] = "dept_time" name="dept-time" class="form-control" maxlength="5"/>
+      <label>Actual Departure Time</label>
+      <input type="time" [(ngModel)] = "dept_time" name="dept-time" class="form-control" maxlength="5"/>
     </div>
     <div class="form-group">
-      <label>Actual Arrival Time (using 24hr format): </label>
-      <input type="text" [(ngModel)] = "arrival_time" name="arrival-time" class="form-control" maxlength="5"/>
+      <label>Actual Arrival Time</label>
+      <input type="time" [(ngModel)] = "arrival_time" name="arrival-time" class="form-control" maxlength="5"/>
     </div>
     <input type="submit" class="btn btn-primary" value="Submit">
   </form>

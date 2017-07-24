@@ -12,17 +12,20 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EntryComponent } from './components/entry/entry.component';
 
-
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
+import { ExportComponent } from './components/export/export.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
-  {path:'', component: HomeComponent},
+  {path:'', component: LoginComponent},
+  {path:'home', component: HomeComponent, canActivate:[AuthGuard]},
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
   {path:'dashboard', component: DashboardComponent},
-  {path:'profile', component: ProfileComponent},
-  {path:'entry/:id', component: EntryComponent}
+  {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
+  {path:'entry/:id', component: EntryComponent, canActivate:[AuthGuard]},
+  {path:'export', component: ExportComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({
@@ -34,7 +37,8 @@ const appRoutes: Routes = [
     DashboardComponent,
     ProfileComponent,
     HomeComponent,
-    EntryComponent
+    EntryComponent,
+    ExportComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,8 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [ValidateService, AuthService],
+  providers: [ValidateService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

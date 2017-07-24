@@ -1,6 +1,11 @@
 <h2>Input Count Data</h2>
 <h4>{{header}}</h4>
 <body>
+<!--
+  <div *ngIf="!depart_times" class="container">
+    Car Number Not Found
+  </div>
+  -->
   <div class="container">
     <form (submit)="onCountSubmit()">
       <table class=".table-hover">
@@ -20,6 +25,20 @@
             <td><input type="text" [(ngModel)]="on1" name="on1"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="off1" name="off1" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments1" name="comments1" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="dept2" name="time2" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="station2" name="station2" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="on2" name="on2"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="off2" name="off2" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments2" name="comments2" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="dept3" name="time3" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="station3" name="station3" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="on3" name="on3"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="off3" name="off3" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments3" name="comments3" class="form-control text-center" placeholder="-"/></td>
           </tr>
         </tbody>
       </table>

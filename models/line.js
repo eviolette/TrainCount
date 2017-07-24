@@ -22,9 +22,12 @@ const LineSchema = mongoose.Schema({
         required: true
     },
     serial_num: {
-        type: Number
+        type: String
     },
     train_line: {
+        type: String
+    },
+    train_num: {
         type: String
     },
     num_cars: {

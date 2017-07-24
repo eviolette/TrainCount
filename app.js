@@ -28,10 +28,11 @@ mongoose.connection.on('error', function(err) {
 
 //var index = require('./routes/index');
 var users = require('./routes/users');
-var trainlines = require('./routes/trainlines');
+var lines = require('./routes/lines');
 var counts = require('./routes/counts');
-
-
+var trains = require('./routes/trains');
+var newcounts = require('./routes/newcounts');
+var linecodes = require('./routes/linecodes');
 
 var app = express();
 
@@ -62,8 +63,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/', index);
 app.use('/users', users);
-app.use('/trainlines', trainlines);
+app.use('/lines', lines);
 app.use('/counts', counts);
+app.use('/trains', trains);
+app.use('/newcounts', newcounts);
+app.use('/linecodes', linecodes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -87,8 +91,8 @@ module.exports = app;
 
 app.get('/', function (req, res) {
     res.send('hi')
-})
+});
 
 app.listen(3000, function () {
     console.log('Website listening on port 3000!')
-})
+});

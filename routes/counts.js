@@ -11,12 +11,20 @@ var config = require('../config/database');
 var mongoose = require('mongoose');
 
 // Count
-router.get('/row/:id', function(req, res, next) {
+router.get('/departures/:id', function(req, res, next) {
     var trainid = +req.params.id;
     Count.findOne({'train' : trainid}, {'rows.dept_time':1, '_id':0}, function(err, row) {
         if (err) throw err;
-        console.log("Rows: %j", row["rows"].map(function(x) {return x.dept_time}));
+        //console.log("Rows: %j", row["rows"].map(function(x) {return x.dept_time}));
         res.json({times: row["rows"].map(function(x) {return x.dept_time})})
+    });
+});
+router.get('/stations/:id', function(req, res, next) {
+    var trainid = +req.params.id;
+    Count.findOne({'train' : trainid}, {'rows.station':1, '_id':0}, function(err, row) {
+        if (err) throw err;
+        //console.log("Rows: %j", row["rows"].map(function(x) {return x.station}));
+        res.json({stations: row["rows"].map(function(x) {return x.station})})
     });
 });
 
