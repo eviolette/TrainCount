@@ -20,25 +20,186 @@
         </thead>
         <tbody>
           <tr>
-            <td><input type="text" [(ngModel)]="dept1" name="time1" class="form-control text-center" placeholder="-" readonly/></td>
-            <td><input type="text" [(ngModel)]="station1" name="station1" class="form-control text-center" placeholder="-" readonly/></td>
-            <td><input type="text" [(ngModel)]="on1" name="on1"  class="form-control text-center" placeholder="-"/></td>
-            <td><input type="text" [(ngModel)]="off1" name="off1" class="form-control text-center" placeholder="-"/></td>
-            <td><input type="text" [(ngModel)]="comments1" name="comments1" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="departures[0]" name="time1" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[0]" name="station1" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[0]" name="on1"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[0]" name="off1" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[0]" name="comments1" class="form-control text-center" placeholder="-"/></td>
           </tr>
           <tr>
-            <td><input type="text" [(ngModel)]="dept2" name="time2" class="form-control text-center" placeholder="-" readonly/></td>
-            <td><input type="text" [(ngModel)]="station2" name="station2" class="form-control text-center" placeholder="-" readonly/></td>
-            <td><input type="text" [(ngModel)]="on2" name="on2"  class="form-control text-center" placeholder="-"/></td>
-            <td><input type="text" [(ngModel)]="off2" name="off2" class="form-control text-center" placeholder="-"/></td>
-            <td><input type="text" [(ngModel)]="comments2" name="comments2" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="departures[1]" name="time2" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[1]" name="station2" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[1]" name="on2"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[1]" name="off2" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[1]" name="comments2" class="form-control text-center" placeholder="-"/></td>
           </tr>
           <tr>
-            <td><input type="text" [(ngModel)]="dept3" name="time3" class="form-control text-center" placeholder="-" readonly/></td>
-            <td><input type="text" [(ngModel)]="station3" name="station3" class="form-control text-center" placeholder="-" readonly/></td>
-            <td><input type="text" [(ngModel)]="on3" name="on3"  class="form-control text-center" placeholder="-"/></td>
-            <td><input type="text" [(ngModel)]="off3" name="off3" class="form-control text-center" placeholder="-"/></td>
-            <td><input type="text" [(ngModel)]="comments3" name="comments3" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="departures[2]" name="time3" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[2]" name="station3" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[2]" name="on3"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[2]" name="off3" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[2]" name="comments3" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[3]" name="time4" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[3]" name="station4" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[3]" name="on4"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[3]" name="off4" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[3]" name="comments4" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[4]" name="time5" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[4]" name="station5" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[4]" name="on5"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[4]" name="off5" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[4]" name="comments5" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[5]" name="time6" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[5]" name="station6" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[5]" name="on6"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[5]" name="off6" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[5]" name="comments6" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[6]" name="time7" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[6]" name="station7" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[6]" name="on7"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[6]" name="off7" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[6]" name="comments7" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[7]" name="time8" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[7]" name="station8" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[7]" name="on8"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[7]" name="off8" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[7]" name="comments8" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[8]" name="time9" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[8]" name="station9" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[8]" name="on9"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[8]" name="off9" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[8]" name="comments9" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[9]" name="time10" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[9]" name="station10" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[9]" name="on10"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[9]" name="off10" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[9]" name="comments10" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[10]" name="time11" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[10]" name="station11" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[10]" name="on11"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[10]" name="off11" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[10]" name="comments11" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[11]" name="time12" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[11]" name="station12" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[11]" name="on12"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[11]" name="off12" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[11]" name="comments12" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[12]" name="time13" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[12]" name="station13" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[12]" name="on13"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[12]" name="off13" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[12]" name="comments13" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[13]" name="time14" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[13]" name="station14" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[13]" name="on14"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[13]" name="off14" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[13]" name="comments14" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[14]" name="time15" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[14]" name="station15" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[14]" name="on15"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[14]" name="off15" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[14]" name="comments15" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[15]" name="time16" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[15]" name="station16" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[15]" name="on16"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[15]" name="off16" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[15]" name="comments16" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[16]" name="time17" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[16]" name="station17" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[16]" name="on17"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[16]" name="off17" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[16]" name="comments17" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[17]" name="time18" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[17]" name="station18" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[17]" name="on18"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[17]" name="off18" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[17]" name="comments18" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[18]" name="time19" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[18]" name="station19" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[18]" name="on19"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[18]" name="off19" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[18]" name="comments19" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[19]" name="time20" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[19]" name="station20" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[19]" name="on20"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[19]" name="off20" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[19]" name="comments20" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[20]" name="time21" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[20]" name="station21" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[20]" name="on21"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[20]" name="off21" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[20]" name="comments21" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[21]" name="time22" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[21]" name="station22" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[21]" name="on22"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[21]" name="off22" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[21]" name="comments22" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[22]" name="time23" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[22]" name="station23" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[22]" name="on23"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[22]" name="off23" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[22]" name="comments23" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[23]" name="time24" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[23]" name="station24" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[23]" name="on24"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[23]" name="off24" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[23]" name="comments24" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[24]" name="time25" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[24]" name="station25" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[24]" name="on25"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[24]" name="off25" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[24]" name="comments25" class="form-control text-center" placeholder="-"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" [(ngModel)]="departures[25]" name="time26" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="stations[25]" name="station26" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="oncounts[25]" name="on26"  class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="offcounts[25]" name="off26" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="comments[25]" name="comments26" class="form-control text-center" placeholder="-"/></td>
           </tr>
         </tbody>
       </table>

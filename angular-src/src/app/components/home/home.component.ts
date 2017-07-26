@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router , ActivatedRoute, NavigationExtras} from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ValidateService } from '../../services/validate.service';
 
 @Component({
   selector: 'app-home',
@@ -21,13 +22,14 @@ export class HomeComponent implements OnInit {
   idStr: String = "";
 
   constructor(private router: Router,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private validateService: ValidateService) { }
 
   ngOnInit() {
   }
 
   onLineSubmit() {
-    alert(this.date);
+    alert(typeof this.dept_time);
 
     const line = {
       date: this.date,
@@ -42,16 +44,18 @@ export class HomeComponent implements OnInit {
       arrival_time: this.arrival_time
     };
 
-    this.idStr += line.train_line + "_" + line.train_num + "_" + "01";
+    this.idStr = line.train_line + "_" + line.train_num + "_" + "01";
 
-    this.authService.registerLine(line).subscribe(data => {
-      if(data.success) {
-        alert('Line is now registered.');
-        this.router.navigate(['/entry', this.idStr]);
-      } else {
-        alert('Line Registration failed');
-      }
-    })
+    if (this.validateService.validateLine(line)) {
+      this.authService.registerLine(line).subscribe(data => {
+        if (data.success) {
+          alert('Line is now registered.');
+          this.router.navigate(['/entry', this.idStr]);
+        } else {
+          alert('Line Registration failed');
+        }
+      })
+    }
 
 
   }

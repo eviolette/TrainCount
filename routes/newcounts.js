@@ -18,21 +18,25 @@ router.get('/stationtime/:id', function(req, res, next) {
     });
 });
 
+
 router.post('/updatecount', function(req, res, next) {
+    console.log('updating');
     let count = new NewCount({
-        trainStationCoachIndex: req.body.trainStationCoachIndex,
-        trainIndex: req.body.trainIndex,
-        stationCode: req.body.stationCode,
+        //trainStationCoachIndex: req.body.trainStationCoachIndex,
+        //trainIndex: req.body.trainIndex,
+        //stationCode: req.body.stationCode,
         stationName: req.body.stationName,
-        stationTime: req.body.stationTime,
+        //stationTime: req.body.stationTime,
         trainCoachIndex: req.body.trainCoachIndex,
         onCount: req.body.onCount,
         offCount: req.body.offCount,
-        comments: req.body.comments
+        stationComment: req.body.comments
     });
-    console.log(count.trainStationCoachIndex);
+    console.log(count.stationComment);
+    console.log(JSON.stringify(count));
 
     NewCount.updateCount(count);
+    res.json({success: true, msg:'Line registered'});
 });
 
 router.get('/exportcount', function (req, res, next) {

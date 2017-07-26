@@ -28,5 +28,20 @@ router.get('/stations/:id', function(req, res, next) {
     });
 });
 
+router.get('/trainexists/:id', function (req, res, next) {
+   var trainid = +req.params.id;
+   console.log(trainid);
+   Count.findOne({'train' : trainid}, function(err, found) {
+       if (err) throw err;
+       if (!found.length) {
+           console.log('train not found');
+           res.send(false);
+       } else {
+           console.log('train found');
+           res.send(true);
+       }
+   })
+});
+
 
 module.exports = router;

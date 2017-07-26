@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams, RequestOptions } from '@angular/http';
+import { Http, Headers, URLSearchParams, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { tokenNotExpired } from 'angular2-jwt';
+//import {Observable} from "rxjs/Observable";
+import {Observable} from "rxjs/Rx";
 //import {RequestOptions} from "http";
 
 @Injectable()
@@ -88,21 +90,29 @@ export class AuthService {
     let options = new RequestOptions();
     options.search = params;
     return this.http.get('http://localhost:3000/counts/departures/' + lineNum, {headers: headers})
-      .map(res => res.json());
+      .map(res => res.json())
+      .catch((err) => {
+        console.log(err);
+        return Observable.throw(err);
+      })
   }
 
   getStationInfo(lineNum) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.get('http://localhost:3000/counts/stations/' + lineNum, {headers: headers})
-      .map(res => res.json());
+      .map(res => res.json())
+      .catch((err) => {
+        console.log(err);
+        return Observable.throw(err);
+      })
   }
 
-  getStationKey(station) {
+  getStationCodeInfo(lineNum) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/newcounts/stationtime/' + station, {headers: headers})
-      .map(res => res.json());
+    return this.http.get('http://localhost:3000/newcounts/stationcodes/' + lineNum, {headers: headers})
+      .map(res => res.json())
   }
 
   updateCount(count) {
