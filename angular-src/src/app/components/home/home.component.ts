@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit {
   }
 
   onLineSubmit() {
-    alert(typeof this.dept_time);
 
     const line = {
       date: this.date,
@@ -44,9 +43,10 @@ export class HomeComponent implements OnInit {
       arrival_time: this.arrival_time
     };
 
-    this.idStr = line.train_line + "_" + line.train_num + "_" + "01";
+    this.idStr = line.train_line + "_" + line.train_num + "_" + this.assignedCarFormatter(line.assigned_car);
 
-    if (this.validateService.validateLine(line)) {
+     if (this.validateService.validateLine(line)) {
+       console.log("pass");
       this.authService.registerLine(line).subscribe(data => {
         if (data.success) {
           alert('Line is now registered.');
@@ -70,8 +70,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  findLineKey(line) {
-
+  assignedCarFormatter(car) {
+    if (car < 10) return "0" + car;
+    return car;
   }
 
 

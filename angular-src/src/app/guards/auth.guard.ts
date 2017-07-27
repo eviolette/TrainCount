@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate{
       return true;
     } else {
       this.router.navigate['/login'];
-      alert('NAH BOI');
+      //alert('NAH BOI');
       return false;
     }
   }

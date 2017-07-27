@@ -18,15 +18,26 @@ router.get('/stationtime/:id', function(req, res, next) {
     });
 });
 
+router.get('/trainexists/:id', function (req, res, next) {
+    var trainid = req.params.id;
+    console.log(trainid);
+    NewCount.findOne({'trainIndex' : trainid}, function(err, found) {
+        if (err) throw err;
+        if (found) {
+            console.log('train found');
+            res.json({success: true});
+        } else {
+            console.log('train not found');
+            res.json({success: false});
+        }
+    })
+});
+
 
 router.post('/updatecount', function(req, res, next) {
     console.log('updating');
     let count = new NewCount({
-        //trainStationCoachIndex: req.body.trainStationCoachIndex,
-        //trainIndex: req.body.trainIndex,
-        //stationCode: req.body.stationCode,
         stationName: req.body.stationName,
-        //stationTime: req.body.stationTime,
         trainCoachIndex: req.body.trainCoachIndex,
         onCount: req.body.onCount,
         offCount: req.body.offCount,
@@ -36,7 +47,7 @@ router.post('/updatecount', function(req, res, next) {
     console.log(JSON.stringify(count));
 
     NewCount.updateCount(count);
-    res.json({success: true, msg:'Line registered'});
+    res.json({success: true, msg:'Count Updated'});
 });
 
 router.get('/exportcount', function (req, res, next) {

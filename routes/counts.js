@@ -16,7 +16,15 @@ router.get('/departures/:id', function(req, res, next) {
     Count.findOne({'train' : trainid}, {'rows.dept_time':1, '_id':0}, function(err, row) {
         if (err) throw err;
         //console.log("Rows: %j", row["rows"].map(function(x) {return x.dept_time}));
-        res.json({times: row["rows"].map(function(x) {return x.dept_time})})
+        if (row) {
+            res.json({
+                success: true,
+                times: row["rows"].map(function(x) {return x.dept_time})});
+        } else {
+            res.json({success: false})
+        }
+
+
     });
 });
 router.get('/stations/:id', function(req, res, next) {
@@ -24,24 +32,17 @@ router.get('/stations/:id', function(req, res, next) {
     Count.findOne({'train' : trainid}, {'rows.station':1, '_id':0}, function(err, row) {
         if (err) throw err;
         //console.log("Rows: %j", row["rows"].map(function(x) {return x.station}));
-        res.json({stations: row["rows"].map(function(x) {return x.station})})
+        if (row) {
+            res.json({
+                success: true,
+                stations: row["rows"].map(function(x) {return x.station})});
+        } else {
+            res.json({success: false});
+        }
     });
 });
 
-router.get('/trainexists/:id', function (req, res, next) {
-   var trainid = +req.params.id;
-   console.log(trainid);
-   Count.findOne({'train' : trainid}, function(err, found) {
-       if (err) throw err;
-       if (!found.length) {
-           console.log('train not found');
-           res.send(false);
-       } else {
-           console.log('train found');
-           res.send(true);
-       }
-   })
-});
+
 
 
 module.exports = router;

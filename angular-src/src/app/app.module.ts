@@ -16,6 +16,7 @@ import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
 import { ExportComponent } from './components/export/export.component';
 import { AuthGuard } from './guards/auth.guard';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 const appRoutes: Routes = [
   {path:'', component: LoginComponent},
@@ -25,7 +26,8 @@ const appRoutes: Routes = [
   {path:'dashboard', component: DashboardComponent},
   {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   {path:'entry/:id', component: EntryComponent, canActivate:[AuthGuard]},
-  {path:'export', component: ExportComponent, canActivate:[AuthGuard]}
+  {path:'export', component: ExportComponent, canActivate:[AuthGuard]},
+  {path:'**', component: PagenotfoundComponent}
 ];
 
 @NgModule({
@@ -38,7 +40,8 @@ const appRoutes: Routes = [
     ProfileComponent,
     HomeComponent,
     EntryComponent,
-    ExportComponent
+    ExportComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,

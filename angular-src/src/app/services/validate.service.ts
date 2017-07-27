@@ -21,6 +21,8 @@ export class ValidateService {
   }
 
   validateLine(line) {
+    const linePair = line.train_line + "_" + line.train_num;
+
     if (typeof line.date == "undefined") {
       alert('Enter a Date');
       return false;
@@ -53,17 +55,27 @@ export class ValidateService {
       alert('Assigned Car must be a number, between 1 and 13');
       return false;
     }
-    if (this.checkTrainNumber(line.train_num)) {
-      return true;
-    }
+    /*
+    this.checkTrainNumber(linePair).subscribe(data => {
+      if (!data.success) {
+        alert('Train Line and Train Number Combination Not Found');
+        return false;
+      } else {
+        alert('returning true');
+        return true;
+      }
+      */
     return true;
+
   }
 
-  checkTrainNumber(trainnum) {
+
+  checkTrainNumber(linePair) {
     console.log('Bout to check');
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/counts/trainexists/' + trainnum, {headers: headers})
+    return this.http.get('http://localhost:3000/newcounts/trainexists/' + linePair, {headers: headers})
+      .map(res => res.json());
   }
 
 }

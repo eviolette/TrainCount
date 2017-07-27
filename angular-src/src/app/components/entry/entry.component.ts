@@ -49,34 +49,31 @@ export class EntryComponent implements OnInit {
 
     this.authService.getDeptInfo(this.lineNum)
       .subscribe((res) => {
-        this.depart_times = res.times;
-        this.numTimes = Object.keys(this.depart_times).length;
-        for (let i in this.depart_times) {
-          this.departures.push(this.depart_times[i]);
+        if (res.success) {
+          this.depart_times = res.times;
+          this.numTimes = Object.keys(this.depart_times).length;
+          for (let i in this.depart_times) {
+            this.departures.push(this.depart_times[i]);
+          }
+          //console.log(this.depart_times);
+          console.log(this.departures);
+        } else {
+          alert('Train Not Found');
+          this.router.navigate(['/home']);
         }
-        //console.log(this.depart_times);
-        console.log(this.departures);
       });
 
     this.authService.getStationInfo(this.lineNum)
       .subscribe((res) => {
+      if (res.success) {
         this.station_times = res.stations;
         this.numStations = Object.keys(this.station_times).length;
         for (let i in this.station_times) {
           this.stations.push(this.station_times[i]);
         }
         console.log(this.station_times);
+      }
       });
-  /*
-    this.authService.getStationCodeInfo(this.lineNum)
-      .subscribe((res) => {
-        this.station_keys = res.stations;
-        for (let i in this.station_keys) {
-          this.stationcodes.push(this.station_keys[i]);
-        }
-        console.log(this.stationcodes);
-      });
-*/
 
   }
 
@@ -86,31 +83,7 @@ export class EntryComponent implements OnInit {
   }
 
   onCountSubmit() {
-    /*
-    for (let i in this.stations) {
-      console.log(this.stations[i]);
-      this.authService.getStationKey(this.stations[i]).subscribe((key) =>
-        {
-          //console.log(key.stationCode);
-          this.stationcodes[i] = key.stationCode;
-          console.log(this.stationcodes[i]);
-        }
-      )
-    }
-    /*
-    /*
-    const count = {
-      //trainStationCoachIndex : this.paramHeader.substring(0,7) + "_" + this.getStationString(this.station1) + this.paramHeader.substring(7),
-      trainIndex : this.paramHeader.substring(0,7),
-      //stationCode : this.getStationString(this.station1),
-      //stationName : this.station1,
-      //stationTime : this.dept1,
-      trainCoachIndex : this.paramHeader,
-      //onCount : this.on1,
-      //offCount : this.off1,
-      //comments1 : this.comments1
-    };
-    */
+
     for (let i in this.departures) {
       const count = {
         //trainStationCoachIndex: this.paramHeader.substring(0, 7) + "_" + this.getStationString(i) + this.paramHeader.substring(10),
@@ -130,27 +103,11 @@ export class EntryComponent implements OnInit {
       if (!(count.stationTime == '-' || count.onCount == null || count.offCount == null)) {
         console.log(JSON.stringify(count));
         this.authService.updateCount(count).subscribe();
+        this.router.navigate(['/home']);
       }
     }
   }
 
-  getStationString(station) {
-    return this.stationcodes[station];
-    /*
-    var key = "potato";
-    this.authService.getStationKey(station).subscribe(
-        function(data) {
-          key = data.stationCode;
-          console.log('Current val: ' + key);
-        },
-        function(err) {
-          console.log(err);
-        }
-    );
-    console.log(key);
-    return key;
-     */
-  }
 
 
 }

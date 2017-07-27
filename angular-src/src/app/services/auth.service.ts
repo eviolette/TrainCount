@@ -108,12 +108,6 @@ export class AuthService {
       })
   }
 
-  getStationCodeInfo(lineNum) {
-    let headers = new Headers();
-    headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/newcounts/stationcodes/' + lineNum, {headers: headers})
-      .map(res => res.json())
-  }
 
   updateCount(count) {
     let headers = new Headers();
