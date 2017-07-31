@@ -10,17 +10,20 @@ import { AuthService } from '../../services/auth.service';
 })
 export class EntryComponent implements OnInit {
 
-  header: String;
+  lineHeader: String;
+  trainHeader: String;
   paramHeader: String;
   lineNum: Number;
   lineCoachNum: String;
-  coachIndex: String = "01";
+  coachIndex: String = "";
 
   departures: Array<String> = [];
   stations: Array<String> = [];
   oncounts: Array<Number> = [];
   offcounts: Array<Number> = [];
   comments: Array<String> = [];
+  netons: Array<Number> = [];
+  netoffs: Array<Number> = [];
   stationcodes: Array<String> = [];
 
 
@@ -39,12 +42,13 @@ export class EntryComponent implements OnInit {
 
   ngOnInit() {
 
-    this.car_num = 10;
 
     this.route.params.subscribe(params => {
       this.paramHeader = params['id'];
-      this.header = "For Train Number " + params['id'].substring(3,7);
+      this.lineHeader = "Line " + params['id'].substring(0,2);
+      this.trainHeader = "Train Number " + params['id'].substring(3,7);
       this.lineNum = this.lineNumDeformatter(params['id'].substring(3,7));
+      this.coachIndex = params['id'].substring(8,10);
     });
 
     this.authService.getDeptInfo(this.lineNum)
@@ -53,7 +57,7 @@ export class EntryComponent implements OnInit {
           this.depart_times = res.times;
           this.numTimes = Object.keys(this.depart_times).length;
           for (let i in this.depart_times) {
-            this.departures.push(this.depart_times[i]);
+            if (this.depart_times[i] != "-") this.departures.push(this.depart_times[i]);
           }
           //console.log(this.depart_times);
           console.log(this.departures);
@@ -69,7 +73,7 @@ export class EntryComponent implements OnInit {
         this.station_times = res.stations;
         this.numStations = Object.keys(this.station_times).length;
         for (let i in this.station_times) {
-          this.stations.push(this.station_times[i]);
+           this.stations.push(this.station_times[i]);
         }
         console.log(this.station_times);
       }
@@ -82,30 +86,98 @@ export class EntryComponent implements OnInit {
     return +str;
   }
 
+  coachIndexAdd(str) {
+    if (str.charAt(0) === "0" && str.charAt(1) === "9") {
+      return "10";
+    } else if (str.charAt(0) === "0" && str.charAt(1) != "9") {
+      let num = +str.charAt(1);
+      num++;
+      return "0" + num;
+    } else {
+      let num = +str;
+      num++;
+      return "" + num;
+    }
+  }
+
+  coachIndexSub(str) {
+    if (str === "10") {
+      return "09";
+    } else if (str.charAt(0) === "0") {
+      let num = +str.charAt(1);
+      num--;
+      return "0" + num;
+    } else {
+      let num = +str;
+      num--;
+      return "" + num;
+    }
+  }
+
+  checkNetCounts() {
+    this.netons[0] = +this.oncounts[0];
+    this.netoffs[0] = +this.offcounts[0];
+    for (let i = 1; i < this.departures.length; i++) {
+      this.netons[i] = +this.oncounts[i] - +this.oncounts[i - 1];
+      this.netoffs[i] = +this.offcounts[i] - +this.offcounts[i - 1];
+      if (this.netons[i] < 0) {
+        alert('Error: Net On Count is Less than 0 at ' + this.stations[i]);
+        return false;
+      }
+      if (this.netoffs[i] < 0) {
+        alert('Error: Net Off Count is Less than 0 at ' + this.stations[i]);
+        return false;
+      }
+      console.log('No err');
+    }
+    return true;
+
+  }
+
+  getPreviousCar() {
+    if(+this.coachIndex == 1) {
+      alert("No Previous Car");
+    } else {
+      this.router.navigate(['/entry', this.paramHeader.substring(0,7) + "_" + this.coachIndexSub(this.coachIndex)]);
+    }
+  }
+
+  getNextCar() {
+    this.router.navigate(['/entry', this.paramHeader.substring(0,7) + "_" + this.coachIndexAdd(this.coachIndex)]);
+  }
+
   onCountSubmit() {
 
-    for (let i in this.departures) {
-      const count = {
-        //trainStationCoachIndex: this.paramHeader.substring(0, 7) + "_" + this.getStationString(i) + this.paramHeader.substring(10),
-        //trainIndex: this.paramHeader.substring(0, 7),
-        //stationCode: this.getStationString(this.stations[i]),
-        stationName: this.stations[i],
-        stationTime: this.departures[i],
-        trainCoachIndex: this.paramHeader,
-        onCount: this.oncounts[i],
-        offCount: this.offcounts[i],
-        comments: this.comments[i]
-      };
+    if (this.checkNetCounts()) {
 
-      if (typeof this.comments[i] == 'undefined') count.comments = '';
-      console.log(count.comments);
+      for (let i = 0; i < this.departures.length; i++) {
+        const count = {
+          //trainStationCoachIndex: this.paramHeader.substring(0, 7) + "_" + this.getStationString(i) + this.paramHeader.substring(10),
+          //trainIndex: this.paramHeader.substring(0, 7),
+          //stationCode: this.getStationString(this.stations[i]),
+          stationName: this.stations[i],
+          stationTime: this.departures[i],
+          trainCoachIndex: this.paramHeader,
+          onCount: this.oncounts[i],
+          offCount: this.offcounts[i],
+          comments: this.comments[i]
+        };
 
-      if (!(count.stationTime == '-' || count.onCount == null || count.offCount == null)) {
-        console.log(JSON.stringify(count));
-        this.authService.updateCount(count).subscribe();
-        this.router.navigate(['/home']);
+        if (typeof this.comments[i] == 'undefined') count.comments = '';
+        console.log(count.comments);
+
+        if (!(count.stationTime == '-' || count.onCount == null || count.offCount == null)) {
+          console.log(JSON.stringify(count));
+          this.authService.updateCount(count).subscribe();
+          this.router.navigate(['/home']);
+
+        }
       }
     }
+  }
+
+  finished() {
+    this.router.navigate(['/export']);
   }
 
 

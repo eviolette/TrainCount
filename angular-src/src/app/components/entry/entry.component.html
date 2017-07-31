@@ -1,5 +1,6 @@
 <h2>Input Count Data</h2>
-<h4>{{header}}</h4>
+<h4>{{lineHeader}}</h4>
+<h5>{{trainHeader}}</h5>
 <body>
 <!--
   <div *ngIf="!depart_times" class="container">
@@ -16,6 +17,8 @@
             <th>On Count</th>
             <th>Off Count</th>
             <th>Comments</th>
+            <th>Net On</th>
+            <th>Net Off</th>
           </tr>
         </thead>
         <tbody>
@@ -25,6 +28,8 @@
             <td><input type="text" [(ngModel)]="oncounts[0]" name="on1"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[0]" name="off1" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[0]" name="comments1" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[0]" name="netons1" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[0]" name="netoffs1" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[1]" name="time2" class="form-control text-center" placeholder="-" readonly/></td>
@@ -32,6 +37,8 @@
             <td><input type="text" [(ngModel)]="oncounts[1]" name="on2"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[1]" name="off2" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[1]" name="comments2" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[1]" name="netons2" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[1]" name="netoffs2" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[2]" name="time3" class="form-control text-center" placeholder="-" readonly/></td>
@@ -39,6 +46,8 @@
             <td><input type="text" [(ngModel)]="oncounts[2]" name="on3"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[2]" name="off3" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[2]" name="comments3" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[2]" name="netons3" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[2]" name="netoffs3" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[3]" name="time4" class="form-control text-center" placeholder="-" readonly/></td>
@@ -46,6 +55,8 @@
             <td><input type="text" [(ngModel)]="oncounts[3]" name="on4"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[3]" name="off4" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[3]" name="comments4" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[3]" name="netons4" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[3]" name="netoffs4" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[4]" name="time5" class="form-control text-center" placeholder="-" readonly/></td>
@@ -53,6 +64,8 @@
             <td><input type="text" [(ngModel)]="oncounts[4]" name="on5"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[4]" name="off5" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[4]" name="comments5" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[4]" name="netons5" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[4]" name="netoffs5" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[5]" name="time6" class="form-control text-center" placeholder="-" readonly/></td>
@@ -60,6 +73,8 @@
             <td><input type="text" [(ngModel)]="oncounts[5]" name="on6"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[5]" name="off6" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[5]" name="comments6" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[5]" name="netons6" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[5]" name="netoffs6" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[6]" name="time7" class="form-control text-center" placeholder="-" readonly/></td>
@@ -67,6 +82,8 @@
             <td><input type="text" [(ngModel)]="oncounts[6]" name="on7"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[6]" name="off7" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[6]" name="comments7" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[6]" name="netons7" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[6]" name="netoffs7" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[7]" name="time8" class="form-control text-center" placeholder="-" readonly/></td>
@@ -74,6 +91,9 @@
             <td><input type="text" [(ngModel)]="oncounts[7]" name="on8"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[7]" name="off8" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[7]" name="comments8" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[7]" name="netons8" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[7]" name="netoffs8" class="form-control text-center" placeholder="-" readonly/></td>
+
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[8]" name="time9" class="form-control text-center" placeholder="-" readonly/></td>
@@ -81,6 +101,8 @@
             <td><input type="text" [(ngModel)]="oncounts[8]" name="on9"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[8]" name="off9" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[8]" name="comments9" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[8]" name="netons9" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[8]" name="netoffs9" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[9]" name="time10" class="form-control text-center" placeholder="-" readonly/></td>
@@ -88,6 +110,8 @@
             <td><input type="text" [(ngModel)]="oncounts[9]" name="on10"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[9]" name="off10" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[9]" name="comments10" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[9]" name="netons10" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[9]" name="netoffs10" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[10]" name="time11" class="form-control text-center" placeholder="-" readonly/></td>
@@ -95,6 +119,8 @@
             <td><input type="text" [(ngModel)]="oncounts[10]" name="on11"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[10]" name="off11" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[10]" name="comments11" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[10]" name="netons11" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[10]" name="netoffs11" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[11]" name="time12" class="form-control text-center" placeholder="-" readonly/></td>
@@ -102,6 +128,8 @@
             <td><input type="text" [(ngModel)]="oncounts[11]" name="on12"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[11]" name="off12" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[11]" name="comments12" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[11]" name="netons12" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[11]" name="netoffs12" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[12]" name="time13" class="form-control text-center" placeholder="-" readonly/></td>
@@ -109,6 +137,8 @@
             <td><input type="text" [(ngModel)]="oncounts[12]" name="on13"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[12]" name="off13" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[12]" name="comments13" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[12]" name="netons13" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[12]" name="netoffs13" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[13]" name="time14" class="form-control text-center" placeholder="-" readonly/></td>
@@ -116,6 +146,8 @@
             <td><input type="text" [(ngModel)]="oncounts[13]" name="on14"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[13]" name="off14" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[13]" name="comments14" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[13]" name="netons14" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[13]" name="netoffs14" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[14]" name="time15" class="form-control text-center" placeholder="-" readonly/></td>
@@ -123,6 +155,8 @@
             <td><input type="text" [(ngModel)]="oncounts[14]" name="on15"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[14]" name="off15" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[14]" name="comments15" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[14]" name="netons15" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[14]" name="netoffs15" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[15]" name="time16" class="form-control text-center" placeholder="-" readonly/></td>
@@ -130,6 +164,8 @@
             <td><input type="text" [(ngModel)]="oncounts[15]" name="on16"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[15]" name="off16" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[15]" name="comments16" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[15]" name="netons16" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[15]" name="netoffs16" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[16]" name="time17" class="form-control text-center" placeholder="-" readonly/></td>
@@ -137,6 +173,8 @@
             <td><input type="text" [(ngModel)]="oncounts[16]" name="on17"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[16]" name="off17" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[16]" name="comments17" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[16]" name="netons17" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[16]" name="netoffs17" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[17]" name="time18" class="form-control text-center" placeholder="-" readonly/></td>
@@ -144,6 +182,8 @@
             <td><input type="text" [(ngModel)]="oncounts[17]" name="on18"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[17]" name="off18" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[17]" name="comments18" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[17]" name="netons18" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[17]" name="netoffs18" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[18]" name="time19" class="form-control text-center" placeholder="-" readonly/></td>
@@ -151,6 +191,8 @@
             <td><input type="text" [(ngModel)]="oncounts[18]" name="on19"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[18]" name="off19" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[18]" name="comments19" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[18]" name="netons19" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[18]" name="netoffs19" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[19]" name="time20" class="form-control text-center" placeholder="-" readonly/></td>
@@ -158,6 +200,8 @@
             <td><input type="text" [(ngModel)]="oncounts[19]" name="on20"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[19]" name="off20" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[19]" name="comments20" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[19]" name="netons20" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[19]" name="netoffs20" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[20]" name="time21" class="form-control text-center" placeholder="-" readonly/></td>
@@ -165,6 +209,8 @@
             <td><input type="text" [(ngModel)]="oncounts[20]" name="on21"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[20]" name="off21" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[20]" name="comments21" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[20]" name="netons21" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[20]" name="netoffs21" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[21]" name="time22" class="form-control text-center" placeholder="-" readonly/></td>
@@ -172,6 +218,8 @@
             <td><input type="text" [(ngModel)]="oncounts[21]" name="on22"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[21]" name="off22" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[21]" name="comments22" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[21]" name="netons22" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[21]" name="netoffs22" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[22]" name="time23" class="form-control text-center" placeholder="-" readonly/></td>
@@ -179,6 +227,8 @@
             <td><input type="text" [(ngModel)]="oncounts[22]" name="on23"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[22]" name="off23" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[22]" name="comments23" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[22]" name="netons23" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[22]" name="netoffs23" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[23]" name="time24" class="form-control text-center" placeholder="-" readonly/></td>
@@ -186,6 +236,8 @@
             <td><input type="text" [(ngModel)]="oncounts[23]" name="on24"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[23]" name="off24" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[23]" name="comments24" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[23]" name="netons24" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[23]" name="netoffs24" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[24]" name="time25" class="form-control text-center" placeholder="-" readonly/></td>
@@ -193,6 +245,8 @@
             <td><input type="text" [(ngModel)]="oncounts[24]" name="on25"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[24]" name="off25" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[24]" name="comments25" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[24]" name="netons25" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[24]" name="netoffs25" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
           <tr>
             <td><input type="text" [(ngModel)]="departures[25]" name="time26" class="form-control text-center" placeholder="-" readonly/></td>
@@ -200,10 +254,21 @@
             <td><input type="text" [(ngModel)]="oncounts[25]" name="on26"  class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="offcounts[25]" name="off26" class="form-control text-center" placeholder="-"/></td>
             <td><input type="text" [(ngModel)]="comments[25]" name="comments26" class="form-control text-center" placeholder="-"/></td>
+            <td><input type="text" [(ngModel)]="netons[25]" name="netons26" class="form-control text-center" placeholder="-" readonly/></td>
+            <td><input type="text" [(ngModel)]="netoffs[25]" name="netoffs26" class="form-control text-center" placeholder="-" readonly/></td>
           </tr>
         </tbody>
       </table>
-      <input type="submit" class="btn btn-primary" value="Submit">
+      <input type="submit" class="btn btn-primary" name="Submit" value="Submit">
+    </form>
+    <form (submit)="getPreviousCar()">
+      <input type="submit" class="btn btn-primary" name="PrevCar" value="Previous Car">
+    </form>
+    <form (submit)="getNextCar()">
+      <input type="submit" class="btn btn-primary" name="NextCar" value="Next Car">
+    </form>
+    <form (submit)="finished()">
+      <input type="submit" class="btn btn-primary" name="Finished" value="Finished">
     </form>
   </div>
 </body>

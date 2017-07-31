@@ -31,12 +31,12 @@
       <input type="date" [(ngModel)]="date"  name="date"  class="form-control">
     </div>
     <div class="form-group">
-      <label>Counter Name: </label>
-      <input type="text" [(ngModel)] = "counter_name" name="counter-name" class="form-control" maxlength="40"/>
-    </div>
-    <div class="form-group">
       <label>Counter Id: </label>
       <input type="number" [(ngModel)] = "counter_id" name="counter-id" class="form-control" maxlength="5"/>
+    </div>
+    <div class="form-group">
+      <label>Counter Name: </label>
+      <input type="text" [(ngModel)] = "counter_name" name="counter-name" class="form-control" maxlength="40"/>
     </div>
     <div class="form-group">
       <label>Assigned Car: </label>
@@ -46,10 +46,12 @@
       <label>Train Car Serial Number: </label>
       <input type="number" [(ngModel)] = "serial_num" name="serial-num" class="form-control" maxlength="5"/>
     </div>
+    <!--
     <div class="form-group">
       <label>Number of Train Cars: </label>
       <input type="number" [(ngModel)] = "num_cars" name="num-cars" class="form-control" maxlength="5"/>
     </div>
+    -->
     <div class="form-group">
       <label>Actual Departure Time</label>
       <input type="time" [(ngModel)] = "dept_time" name="dept-time" class="form-control" maxlength="5"/>
