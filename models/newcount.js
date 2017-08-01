@@ -97,6 +97,12 @@ module.exports.updateCount = function (newcount) {
         {
             $set:
                 {
+                    trainStationCoachIndex: newcount.trainStationCoachIndex,
+                    trainIndex: newcount.trainIndex,
+                    stationCode: newcount.stationCode,
+                    stationName: newcount.stationName,
+                    stationTime: newcount.stationTime,
+                    trainCoachIndex: newcount.trainCoachIndex,
                     onCount: newcount.onCount,
                     offCount: newcount.offCount,
                     stationComment: newcount.comments
