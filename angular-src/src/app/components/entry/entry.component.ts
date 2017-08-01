@@ -42,7 +42,6 @@ export class EntryComponent implements OnInit {
 
   ngOnInit() {
 
-
     this.route.params.subscribe(params => {
       this.paramHeader = params['id'];
       this.lineHeader = "Line " + params['id'].substring(0,2);
@@ -50,6 +49,8 @@ export class EntryComponent implements OnInit {
       this.lineNum = this.lineNumDeformatter(params['id'].substring(3,7));
       this.coachIndex = params['id'].substring(8,10);
     });
+
+
 
     this.authService.getDeptInfo(this.lineNum)
       .subscribe((res) => {
@@ -60,7 +61,7 @@ export class EntryComponent implements OnInit {
             if (this.depart_times[i] != "-") this.departures.push(this.depart_times[i]);
           }
           //console.log(this.depart_times);
-          console.log(this.departures);
+          //console.log(this.departures);
         } else {
           alert('Train Not Found');
           this.router.navigate(['/home']);
@@ -74,10 +75,35 @@ export class EntryComponent implements OnInit {
         this.numStations = Object.keys(this.station_times).length;
         for (let i in this.station_times) {
            this.stations.push(this.station_times[i]);
+           this.authService.findTrainCoach(this.paramHeader).subscribe((res) => {
+             if (res.success) {
+               this.authService.getOnOffCounts(this.paramHeader + this.stations[i]).subscribe((res) => {
+                 if (res.success) {
+                   this.oncounts[i] = res.onCount;
+                   console.log(this.oncounts[i]);
+                   this.offcounts[i] = res.offCount;
+                   this.stationcodes[i] = res.stationCode;
+                   console.log(this.stationcodes[i]);
+                 }
+               })
+             } else {
+               this.authService.getOnOffCounts(this.paramHeader.substring(0,7) + "_01" + this.stations[i]).subscribe((res) => {
+                 if (res.success) {
+                   this.oncounts[i] = 0;
+                   console.log(this.oncounts[i]);
+                   this.offcounts[i] = 0;
+                   this.stationcodes[i] = res.stationCode;
+                   console.log(this.stationcodes[i]);
+                 }
+               })
+             }
+           });
+
         }
         console.log(this.station_times);
       }
       });
+
 
   }
 
@@ -138,23 +164,24 @@ export class EntryComponent implements OnInit {
     if(+this.coachIndex == 1) {
       alert("No Previous Car");
     } else {
-      this.router.navigate(['/entry', this.paramHeader.substring(0,7) + "_" + this.coachIndexSub(this.coachIndex)]);
+      this.router.navigate(['/dummy', this.paramHeader.substring(0,7) + "_" + this.coachIndexSub(this.coachIndex)]);
     }
   }
 
   getNextCar() {
-    this.router.navigate(['/entry', this.paramHeader.substring(0,7) + "_" + this.coachIndexAdd(this.coachIndex)]);
+    this.router.navigate(['/dummy', this.paramHeader.substring(0,7) + "_" + this.coachIndexAdd(this.coachIndex)]);
   }
 
   onCountSubmit() {
+    console.log(this.stationcodes);
 
     if (this.checkNetCounts()) {
 
       for (let i = 0; i < this.departures.length; i++) {
         const count = {
-          //trainStationCoachIndex: this.paramHeader.substring(0, 7) + "_" + this.getStationString(i) + this.paramHeader.substring(10),
-          //trainIndex: this.paramHeader.substring(0, 7),
-          //stationCode: this.getStationString(this.stations[i]),
+          trainStationCoachIndex: this.paramHeader.substring(0, 7) + "_" + this.stationcodes[i] + "_" + this.paramHeader.substring(8,10),
+          trainIndex: this.paramHeader.substring(0, 7),
+          stationCode: this.stationcodes[i],
           stationName: this.stations[i],
           stationTime: this.departures[i],
           trainCoachIndex: this.paramHeader,
@@ -162,12 +189,13 @@ export class EntryComponent implements OnInit {
           offCount: this.offcounts[i],
           comments: this.comments[i]
         };
+        console.log(count);
 
         if (typeof this.comments[i] == 'undefined') count.comments = '';
         console.log(count.comments);
 
         if (!(count.stationTime == '-' || count.onCount == null || count.offCount == null)) {
-          console.log(JSON.stringify(count));
+          //console.log(JSON.stringify(count));
           this.authService.updateCount(count).subscribe();
           this.router.navigate(['/home']);
 

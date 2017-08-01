@@ -8,6 +8,27 @@ var NewCount = require('../models/newcount');
 var config = require('../config/database');
 var mongoose = require('mongoose');
 
+
+router.get('/onoffs/:id', function(req, res, next) {
+   //console.log('get registered');
+   var train = req.params.id.substring(0, 10);
+   //console.log(train);
+   var station = req.params.id.substring(10);
+   //console.log(station);
+   NewCount.findOne({'stationName' : station, 'trainCoachIndex' : train}, function(err, entry) {
+       if (err) throw err;
+       if (entry) {
+           console.log(entry);
+           res.json({success: true,
+                     onCount: entry.onCount,
+                     offCount: entry.offCount,
+                     stationCode: entry.stationCode})
+       } else {
+           res.json({success: false})
+       }
+   })
+});
+
 router.get('/stationtime/:id', function(req, res, next) {
     console.log("Get registered");
     var station = req.params.id;
@@ -19,9 +40,9 @@ router.get('/stationtime/:id', function(req, res, next) {
 });
 
 router.get('/trainexists/:id', function (req, res, next) {
-    var trainid = req.params.id;
-    console.log(trainid);
-    NewCount.findOne({'trainIndex' : trainid}, function(err, found) {
+    var coach = req.params.id;
+    console.log(coach);
+    NewCount.findOne({'trainCoachIndex' : coach}, function(err, found) {
         if (err) throw err;
         if (found) {
             console.log('train found');
@@ -37,7 +58,11 @@ router.get('/trainexists/:id', function (req, res, next) {
 router.post('/updatecount', function(req, res, next) {
     console.log('updating');
     let count = new NewCount({
+        trainStationCoachIndex: req.body.trainStationCoachIndex,
+        trainIndex: req.body.trainIndex,
+        stationCode: req.body.stationCode,
         stationName: req.body.stationName,
+        stationTime: req.body.stationTime,
         trainCoachIndex: req.body.trainCoachIndex,
         onCount: req.body.onCount,
         offCount: req.body.offCount,

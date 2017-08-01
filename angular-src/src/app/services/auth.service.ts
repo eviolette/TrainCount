@@ -108,6 +108,20 @@ export class AuthService {
       })
   }
 
+  findTrainCoach(coach) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/newcounts/trainexists/' + coach, {headers: headers})
+      .map(res => res.json());
+  }
+
+  getOnOffCounts(indexStation) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/newcounts/onoffs/' + indexStation, {headers: headers})
+      .map(res => res.json());
+  }
+
 
   updateCount(count) {
     let headers = new Headers();

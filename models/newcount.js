@@ -94,16 +94,22 @@ function addNewCountToCollection(data) {
 
 module.exports.updateCount = function (newcount) {
     NewCount.findOneAndUpdate({'trainCoachIndex' : newcount.trainCoachIndex, 'stationName' : newcount.stationName},
-        {$set:
-            {
-                onCount: newcount.onCount,
-                offCount: newcount.offCount,
-                stationComment: newcount.comments
-            }
+        {
+            $set:
+                {
+                    onCount: newcount.onCount,
+                    offCount: newcount.offCount,
+                    stationComment: newcount.comments
+                }
         },
+        {
+            new: true,
+            upsert: true
+        }
+        ,
         function(err, count) {
             if(err) console.log(err);
-            //console.log(count);
+            console.log(count);
         });
 };
 
