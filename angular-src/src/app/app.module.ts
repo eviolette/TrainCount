@@ -18,6 +18,7 @@ import { ExportComponent } from './components/export/export.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { DummyComponent } from './components/dummy/dummy.component';
+import { UtilitiesComponent } from './components/utilities/utilities.component';
 
 const appRoutes: Routes = [
   {path:'', component: LoginComponent},
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
   {path:'entry/:id', component: EntryComponent, canActivate:[AuthGuard]},
   {path:'dummy/:id', component: DummyComponent, canActivate:[AuthGuard]},
   {path:'export', component: ExportComponent, canActivate:[AuthGuard]},
+  {path:'utilities', component: UtilitiesComponent, canActivate:[AuthGuard]},
   {path:'**', component: PagenotfoundComponent}
 ];
 
@@ -44,7 +46,8 @@ const appRoutes: Routes = [
     EntryComponent,
     ExportComponent,
     PagenotfoundComponent,
-    DummyComponent
+    DummyComponent,
+    UtilitiesComponent
   ],
   imports: [
     BrowserModule,

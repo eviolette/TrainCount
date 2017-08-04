@@ -7,21 +7,24 @@ var router = express.Router();
 var NewCount = require('../models/newcount');
 var config = require('../config/database');
 var mongoose = require('mongoose');
+var path = require('path');
+var fs = require('fs');
 
 
 router.get('/onoffs/:id', function(req, res, next) {
    //console.log('get registered');
    var train = req.params.id.substring(0, 10);
-   //console.log(train);
+   console.log(train);
    var station = req.params.id.substring(10);
-   //console.log(station);
+   console.log(station);
    NewCount.findOne({'stationName' : station, 'trainCoachIndex' : train}, function(err, entry) {
        if (err) throw err;
        if (entry) {
-           console.log(entry);
+           console.log(entry.stationComment);
            res.json({success: true,
                      onCount: entry.onCount,
                      offCount: entry.offCount,
+                     comments: entry.stationComment,
                      stationCode: entry.stationCode})
        } else {
            res.json({success: false})
@@ -41,7 +44,7 @@ router.get('/stationtime/:id', function(req, res, next) {
 
 router.get('/trainexists/:id', function (req, res, next) {
     var coach = req.params.id;
-    console.log(coach);
+    //console.log(coach);
     NewCount.findOne({'trainCoachIndex' : coach}, function(err, found) {
         if (err) throw err;
         if (found) {
@@ -49,6 +52,21 @@ router.get('/trainexists/:id', function (req, res, next) {
             res.json({success: true});
         } else {
             console.log('train not found');
+            res.json({success: false});
+        }
+    })
+});
+
+router.get('/lineexists/:id', function (req, res, next) {
+    var train = req.params.id;
+    //console.log(train);
+    NewCount.findOne({'trainIndex' : train}, function(err, found) {
+        if (err) throw err;
+        if (found) {
+            //console.log('train found');
+            res.json({success: true});
+        } else {
+            //console.log('train not found');
             res.json({success: false});
         }
     })
@@ -72,20 +90,16 @@ router.post('/updatecount', function(req, res, next) {
     console.log(JSON.stringify(count));
 
     NewCount.updateCount(count);
+
     res.json({success: true, msg:'Count Updated'});
 });
 
 router.get('/exportcount', function (req, res, next) {
-  NewCount.exportData();
-  var file = __dirname + '/../countstest.csv';
   console.log('attempting to download');
   res.setHeader('Content-disposition', 'attachment; filename=countstest.csv');
   res.setHeader('Content-type', 'text/csv');
-  res.download(file, function (err) {
-      if(err) console.log(err);
-      console.log("no err");
-  }
-  );
+  res.flush();
+  NewCount.exportData(res);
 });
 
 module.exports = router;

@@ -80,7 +80,7 @@ function formatNewCountData(data) {
         trainCoachIndex: csvRow[5],
         onCount: 0,
         offCount: 0,
-        stationComment: csvRow[8]
+        stationComment: ""
     };
     return countRow;
 }
@@ -105,7 +105,7 @@ module.exports.updateCount = function (newcount) {
                     trainCoachIndex: newcount.trainCoachIndex,
                     onCount: newcount.onCount,
                     offCount: newcount.offCount,
-                    stationComment: newcount.comments
+                    stationComment: newcount.stationComment
                 }
         },
         {
@@ -119,9 +119,9 @@ module.exports.updateCount = function (newcount) {
         });
 };
 
-module.exports.exportData = function() {
+module.exports.exportData = function(output) {
     NewCount.findAndStreamCsv({})
-        .pipe(fs.createWriteStream('countstest.csv'));
+        .pipe(output);
 
 };
 

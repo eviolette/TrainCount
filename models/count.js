@@ -4,7 +4,8 @@
 
 var fs = require('fs');
 var csv = require('fast-csv');
-var stream = fs.createReadStream('/users/eviolette/Downloads/newcounts.csv');
+var stream = fs.createReadStream('/users/eviolette/Downloads/gtfs.csv');
+var elecstream = fs.createReadStream('/users/eviolette/Downloads/gtfsELEC.csv');
 var mongoose = require('mongoose');
 
 var config = require('../config/database');
@@ -51,6 +52,7 @@ var Count = module.exports = mongoose.model('Count', countSchema);
 
 
 const TRAIN_DIR_COL = 0, TRAIN_LINE_COL = 1, TRAIN_ID_COL = 2, STATION_OFFSET = 4, MAX_COUNT = 26, DEPT_OFFSET = 26;
+const MAX_COUNT_ELEC = 34, DEPT_OFFSET_ELEC = 34;
 
 //read in CSV as stream row by row
 csv.fromStream(stream, {headers:true}, {ignoreEmpty:false})
@@ -58,14 +60,29 @@ csv.fromStream(stream, {headers:true}, {ignoreEmpty:false})
 
 
         //console.log(formatData(data));
-        addCountToCollection(formatData(data));
+        addCountToCollection(formatData(data, "Standard"));
     })
     .on('end', function(){
         // console.log('done');
         //console.log(masterList.String());
     });
 
-function formatData(data) {
+//read in CSV as stream row by row
+csv.fromStream(elecstream, {headers:true}, {ignoreEmpty:false})
+    .on('data', function(data){
+
+
+        //console.log(formatData(data));
+        addCountToCollection(formatData(data, "Elec"));
+    })
+    .on('end', function(){
+        // console.log('done');
+        //console.log(masterList.String());
+    });
+
+
+
+function formatData(data, type) {
     var csvRow = [];
 
     for (var i in data)
@@ -76,26 +93,45 @@ function formatData(data) {
         line: csvRow[TRAIN_LINE_COL],
         train: +csvRow[TRAIN_ID_COL]
     };
-    var count = numOfStations(csvRow);
+    var count = numOfStations(csvRow, type);
     rows = [];
-    for (var stationIndex = 0; stationIndex < count; stationIndex++) {
-        rows.push({
-            dept_time: csvRow[stationIndex + DEPT_OFFSET + STATION_OFFSET],
-            station: csvRow[stationIndex + STATION_OFFSET],
-            cars : []
-        })
+    if (type === "Standard") {
+        for (var stationIndex = 0; stationIndex < count; stationIndex++) {
+            rows.push({
+                dept_time: csvRow[stationIndex + DEPT_OFFSET + STATION_OFFSET],
+                station: csvRow[stationIndex + STATION_OFFSET],
+                cars: []
+            })
+        }
+    } else if (type === "Elec") {
+        for (var stationIndex = 0; stationIndex < count; stationIndex++) {
+            rows.push({
+                dept_time: csvRow[stationIndex + DEPT_OFFSET_ELEC + STATION_OFFSET],
+                station: csvRow[stationIndex + STATION_OFFSET],
+                cars: []
+            })
+        }
     }
     train.rows = rows;
     return train;
 }
 
-function numOfStations(row) {
-    for (var stationIndex = 0; stationIndex < MAX_COUNT; stationIndex++) {
-        if(!row[stationIndex + STATION_OFFSET]) {
-            return stationIndex;
+function numOfStations(row, type) {
+    if (type === "Standard") {
+        for (var stationIndex = 0; stationIndex < MAX_COUNT; stationIndex++) {
+            if (!row[stationIndex + STATION_OFFSET]) {
+                return stationIndex;
+            }
         }
+        return MAX_COUNT;
+    } else if (type === "Elec") {
+        for (var stationIndex = 0; stationIndex < MAX_COUNT_ELEC; stationIndex++) {
+            if (!row[stationIndex + STATION_OFFSET]) {
+                return stationIndex;
+            }
+        }
+        return MAX_COUNT_ELEC;
     }
-    return  MAX_COUNT;
 }
 
 function addCountToCollection(data){

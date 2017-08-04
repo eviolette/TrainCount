@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   dept_time: String;
   arrival_time: String;
   idStr: String = "";
+  linePair: String;
 
   constructor(private router: Router,
               private authService: AuthService,
@@ -44,17 +45,26 @@ export class HomeComponent implements OnInit {
     };
 
     this.idStr = line.train_line + "_" + line.train_num + "_" + this.assignedCarFormatter(line.assigned_car);
+    this.linePair = line.train_line + "_" + line.train_num;
 
-     if (this.validateService.validateLine(line)) {
-       console.log("pass");
-      this.authService.registerLine(line).subscribe(data => {
-        if (data.success) {
-          alert('Line is now registered.');
-          this.router.navigate(['/entry', this.idStr]);
-        } else {
-          alert('Line Registration failed');
-        }
-      })
+     if (this.validateLine(line)) {
+       //console.log("pass");
+       this.validateService.checkTrainNumber(this.linePair).subscribe(data => {
+         if (!data.success) {
+           alert('Train Line and Train Number Combination Not Found');
+         } else {
+           //alert('returning true');
+           this.authService.registerLine(line).subscribe(data => {
+             if (data.success) {
+               //alert('Line is now registered.');
+               this.router.navigate(['/entry', this.idStr]);
+             } else {
+               alert('Line Validation failed');
+             }
+           })
+         }
+       });
+
     }
 
 
@@ -73,6 +83,36 @@ export class HomeComponent implements OnInit {
   assignedCarFormatter(car) {
     if (car < 10) return "0" + car;
     return car;
+  }
+
+  validateLine(line) {
+    const linePair = line.train_line + "_" + line.train_num;
+
+    if (typeof line.date == "undefined") {
+      alert('Enter a Date');
+      return false;
+    }
+    if (typeof line.counter_id != "number") {
+      alert('Use a valid number for the Counter Id');
+      return false;
+    }
+    if (typeof line.serial_num != 'number') {
+      alert('Use a valid number for the Car Serial Number');
+      return false;
+    }
+    if (typeof line.dept_time == "undefined") {
+      alert('Enter a Departure Time');
+      return false;
+    }
+    if (typeof line.arrival_time == "undefined") {
+      alert('Enter an Arrival Time');
+      return false;
+    }
+    if (typeof  line.assigned_car != 'number' || line.assigned_car < 1 || line.assigned_car > 13) {
+      alert('Assigned Car must be a number, between 1 and 13');
+      return false;
+    }
+    return true;
   }
 
 

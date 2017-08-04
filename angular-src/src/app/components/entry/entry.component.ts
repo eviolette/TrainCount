@@ -52,7 +52,7 @@ export class EntryComponent implements OnInit {
 
 
 
-    this.authService.getDeptInfo(this.lineNum)
+    this.authService.getDeptInfo(this.paramHeader.substring(0,2) + this.lineNum)
       .subscribe((res) => {
         if (res.success) {
           this.depart_times = res.times;
@@ -68,34 +68,40 @@ export class EntryComponent implements OnInit {
         }
       });
 
-    this.authService.getStationInfo(this.lineNum)
+    this.authService.getStationInfo(this.paramHeader.substring(0,2) + this.lineNum)
       .subscribe((res) => {
       if (res.success) {
         this.station_times = res.stations;
         this.numStations = Object.keys(this.station_times).length;
         for (let i in this.station_times) {
-           this.stations.push(this.station_times[i]);
+           if (this.depart_times && this.depart_times[i] != "-") this.stations.push(this.station_times[i]);
            this.authService.findTrainCoach(this.paramHeader).subscribe((res) => {
              if (res.success) {
-               this.authService.getOnOffCounts(this.paramHeader + this.stations[i]).subscribe((res) => {
-                 if (res.success) {
-                   this.oncounts[i] = res.onCount;
-                   console.log(this.oncounts[i]);
-                   this.offcounts[i] = res.offCount;
-                   this.stationcodes[i] = res.stationCode;
-                   console.log(this.stationcodes[i]);
+               if (this.stations[i]) {
+                 this.authService.getOnOffCounts(this.paramHeader + this.stations[i].replace(/\//g, '%2F')).subscribe((res) => {
+                   if (res.success) {
+                     this.oncounts[i] = res.onCount;
+                     //console.log(this.oncounts);
+                     this.offcounts[i] = res.offCount;
+                     this.comments[i] = res.comments;
+                     console.log(res.comments);
+                     this.stationcodes[i] = res.stationCode;
+                     console.log(this.stationcodes);
+                   }
+                 })
+               } else {
+                 if (this.stations[i]) {
+                   this.authService.getOnOffCounts(this.paramHeader.substring(0, 7) + "_01" + this.stations[i].replace(/\//g, '%2F')).subscribe((res) => {
+                     if (res.success) {
+                       this.oncounts[i] = 0;
+                       console.log(this.oncounts);
+                       this.offcounts[i] = 0;
+                       this.stationcodes[i] = res.stationCode;
+                       console.log(this.stationcodes);
+                     }
+                   })
                  }
-               })
-             } else {
-               this.authService.getOnOffCounts(this.paramHeader.substring(0,7) + "_01" + this.stations[i]).subscribe((res) => {
-                 if (res.success) {
-                   this.oncounts[i] = 0;
-                   console.log(this.oncounts[i]);
-                   this.offcounts[i] = 0;
-                   this.stationcodes[i] = res.stationCode;
-                   console.log(this.stationcodes[i]);
-                 }
-               })
+               }
              }
            });
 
@@ -197,7 +203,7 @@ export class EntryComponent implements OnInit {
         if (!(count.stationTime == '-' || count.onCount == null || count.offCount == null)) {
           //console.log(JSON.stringify(count));
           this.authService.updateCount(count).subscribe();
-          this.router.navigate(['/home']);
+          //this.router.navigate(['/home']);
 
         }
       }
