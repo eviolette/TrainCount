@@ -37,7 +37,7 @@ var newCountSchema = new mongoose.Schema({
     stationComment : {
         type: String
     }
-});
+}, {strict : true});
 
 newCountSchema.plugin(mongooseToCsv, {
     headers: 'TrainStationCoachIndex TrainIndex StationCode StationName StationTime TrainCoachIndex OnCount OffCount StationComment',
@@ -56,14 +56,21 @@ newCountSchema.plugin(mongooseToCsv, {
 
 var NewCount = module.exports = mongoose.model('NewCount', newCountSchema);
 
-csv.fromStream(stream, {headers: true}, {ignoreEmpty: false})
-    .on('data', function(data) {
-       //console.log(formatNewCountData(data));
-       addNewCountToCollection(formatNewCountData(data));
-    })
-    .on('done', function() {
-        console.log("done");
-    });
+NewCount.find({}, function(err, found) {
+    if (!found.length) {
+        csv.fromStream(stream, {headers: true}, {ignoreEmpty: false})
+            .on('data', function(data) {
+                console.log(formatNewCountData(data));
+                addNewCountToCollection(formatNewCountData(data));
+            })
+            .on('done', function() {
+                console.log("done");
+            });
+    }
+});
+
+
+
 
 function formatNewCountData(data) {
     var csvRow = [];

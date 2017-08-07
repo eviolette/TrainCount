@@ -54,31 +54,35 @@ var Count = module.exports = mongoose.model('Count', countSchema);
 const TRAIN_DIR_COL = 0, TRAIN_LINE_COL = 1, TRAIN_ID_COL = 2, STATION_OFFSET = 4, MAX_COUNT = 26, DEPT_OFFSET = 26;
 const MAX_COUNT_ELEC = 34, DEPT_OFFSET_ELEC = 34;
 
+Count.find({}, function (err, found) {
+   if (!found.length) {
+       //read in CSV as stream row by row
+       csv.fromStream(stream, {headers:true}, {ignoreEmpty:false})
+           .on('data', function(data){
+
+
+               console.log(formatData(data));
+               addCountToCollection(formatData(data, "Standard"));
+           })
+           .on('end', function(){
+               // console.log('done');
+               //console.log(masterList.String());
+           });
+
 //read in CSV as stream row by row
-csv.fromStream(stream, {headers:true}, {ignoreEmpty:false})
-    .on('data', function(data){
+       csv.fromStream(elecstream, {headers:true}, {ignoreEmpty:false})
+           .on('data', function(data){
 
 
-        //console.log(formatData(data));
-        addCountToCollection(formatData(data, "Standard"));
-    })
-    .on('end', function(){
-        // console.log('done');
-        //console.log(masterList.String());
-    });
-
-//read in CSV as stream row by row
-csv.fromStream(elecstream, {headers:true}, {ignoreEmpty:false})
-    .on('data', function(data){
-
-
-        //console.log(formatData(data));
-        addCountToCollection(formatData(data, "Elec"));
-    })
-    .on('end', function(){
-        // console.log('done');
-        //console.log(masterList.String());
-    });
+               console.log(formatData(data));
+               addCountToCollection(formatData(data, "Elec"));
+           })
+           .on('end', function(){
+               // console.log('done');
+               //console.log(masterList.String());
+           });
+   }
+});
 
 
 
