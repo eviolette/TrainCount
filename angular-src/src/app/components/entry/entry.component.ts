@@ -50,6 +50,13 @@ export class EntryComponent implements OnInit {
       this.coachIndex = params['id'].substring(8,10);
     });
 
+    this.authService.checkNumberOfCars(this.paramHeader.substring(0,7)).subscribe((res) => {
+      console.log(res.numCars);
+      if (res.numCars < this.lineNumDeformatter(this.coachIndex)) {
+        alert('Warning: Number of Cars is Listed as ' + res.numCars);
+      }
+    });
+
 
 
     this.authService.getDeptInfo(this.paramHeader.substring(0,2) + this.lineNum)
@@ -74,9 +81,11 @@ export class EntryComponent implements OnInit {
         this.station_times = res.stations;
         this.numStations = Object.keys(this.station_times).length;
         for (let i in this.station_times) {
-           if (this.depart_times && this.depart_times[i] != "-") this.stations.push(this.station_times[i]);
+          //if (this.depart_times && this.depart_times[i] != "-") was used before the next line
+           this.stations.push(this.station_times[i]);
            this.authService.findTrainCoach(this.paramHeader).subscribe((res) => {
              if (res.success) {
+               console.log('pass');
                if (this.stations[i]) {
                  this.authService.getOnOffCounts(this.paramHeader + this.stations[i].replace(/\//g, '%2F')).subscribe((res) => {
                    if (res.success) {
@@ -89,7 +98,8 @@ export class EntryComponent implements OnInit {
                      console.log(this.stationcodes);
                    }
                  })
-               } else {
+               }
+             } else {
                  if (this.stations[i]) {
                    this.authService.getOnOffCounts(this.paramHeader.substring(0, 7) + "_01" + this.stations[i].replace(/\//g, '%2F')).subscribe((res) => {
                      if (res.success) {
@@ -102,7 +112,6 @@ export class EntryComponent implements OnInit {
                    })
                  }
                }
-             }
            });
 
         }

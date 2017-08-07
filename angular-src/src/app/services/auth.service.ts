@@ -130,6 +130,15 @@ export class AuthService {
       .map(res=>res.json());
   }
 
+  // Train Methods (For Number of Cars)
+
+  checkNumberOfCars(index) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/trains/getnumberofcars/' + index, {headers: headers})
+      .map(res => res.json());
+  };
+
 
   // Export Methods
 

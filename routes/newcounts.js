@@ -14,13 +14,13 @@ var fs = require('fs');
 router.get('/onoffs/:id', function(req, res, next) {
    //console.log('get registered');
    var train = req.params.id.substring(0, 10);
-   console.log(train);
+   //console.log(train);
    var station = req.params.id.substring(10);
-   console.log(station);
+   //console.log(station);
    NewCount.findOne({'stationName' : station, 'trainCoachIndex' : train}, function(err, entry) {
        if (err) throw err;
        if (entry) {
-           console.log(entry.stationComment);
+           //console.log(entry.stationComment);
            res.json({success: true,
                      onCount: entry.onCount,
                      offCount: entry.offCount,
@@ -33,11 +33,11 @@ router.get('/onoffs/:id', function(req, res, next) {
 });
 
 router.get('/stationtime/:id', function(req, res, next) {
-    console.log("Get registered");
+    //console.log("Get registered");
     var station = req.params.id;
     NewCount.findOne({'stationName' : station}, {'stationCode':1, '_id':0}, function(err, entry) {
         if (err) throw err;
-        console.log(entry);
+        //console.log(entry);
         res.json({stationCode: entry['stationCode']})
     });
 });

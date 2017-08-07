@@ -19,6 +19,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { DummyComponent } from './components/dummy/dummy.component';
 import { UtilitiesComponent } from './components/utilities/utilities.component';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 const appRoutes: Routes = [
   {path:'', component: LoginComponent},
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
     ExportComponent,
     PagenotfoundComponent,
     DummyComponent,
-    UtilitiesComponent
+    UtilitiesComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,

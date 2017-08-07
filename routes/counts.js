@@ -15,7 +15,7 @@ router.get('/departures/:id', function(req, res, next) {
     var trainid = +(req.params.id.substring(2));
     var line = +req.params.id.substring(0,2);
     var linestr = formatIntoLine(line);
-    console.log(line);
+    //console.log(line);
     Count.findOne({'train' : trainid, 'line' : linestr}, {'rows.dept_time':1, '_id':0}, function(err, row) {
         if (err) throw err;
         //console.log("Rows: %j", row["rows"].map(function(x) {return x.dept_time}));
@@ -35,7 +35,7 @@ router.get('/stations/:id', function(req, res, next) {
     var line = +req.params.id.substring(0,2);
     var linestr = formatIntoLine(line);
     line = formatIntoLine(trainid);
-    console.log(line);
+    //console.log(line);
     Count.findOne({'train' : trainid, 'line' : linestr}, {'rows.station':1, '_id':0}, function(err, row) {
         if (err) throw err;
         //console.log("Rows: %j", row["rows"].map(function(x) {return x.station}));

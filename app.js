@@ -32,7 +32,6 @@ var lines = require('./routes/lines');
 var counts = require('./routes/counts');
 var trains = require('./routes/trains');
 var newcounts = require('./routes/newcounts');
-var linecodes = require('./routes/linecodes');
 
 var app = express();
 
@@ -41,7 +40,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.jpg')));
 
 
 // MIDDLEWARE
@@ -67,7 +66,6 @@ app.use('/lines', lines);
 app.use('/counts', counts);
 app.use('/trains', trains);
 app.use('/newcounts', newcounts);
-app.use('/linecodes', linecodes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

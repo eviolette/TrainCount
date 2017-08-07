@@ -3,7 +3,7 @@
  */
 var fs = require('fs');
 var csv = require('fast-csv');
-var stream = fs.createReadStream('/users/eviolette/Downloads/trainraw.csv');
+var stream = fs.createReadStream('./uploads/trainraw');
 var mongoose = require('mongoose');
 
 var config = require('../config/database');
@@ -18,7 +18,7 @@ const trainDataSchema = mongoose.Schema({
         type: String
     },
     trainLine: {
-        type: Number
+        type: String
     },
     trainNo: {
         type: String
@@ -27,7 +27,7 @@ const trainDataSchema = mongoose.Schema({
         type: String
     },
     numCars: {
-        type: String
+        type: Number
     },
     crewList: {
         type: String
@@ -40,15 +40,20 @@ const trainDataSchema = mongoose.Schema({
 const Train = module.exports = mongoose.model('Train', trainDataSchema);
 
 
-// read in CSV as stream, row by row
-csv.fromStream(stream, {headers:true}, {ignoreEmpty: false})
-    .on('data', function (data) {
-        //console.log(data);
-        addTrainToCollection(formatTrainData(data));
-    })
-    .on('end', function() {
-        //console.log('done');
-    });
+Train.find({}, function(err, found) {
+    if (!found.length) {
+        // read in CSV as stream, row by row
+        csv.fromStream(stream, {headers:true}, {ignoreEmpty: false})
+            .on('data', function (data) {
+                //console.log(data);
+                addTrainToCollection(formatTrainData(data));
+            })
+            .on('end', function() {
+                //console.log('done');
+            });
+    }
+});
+
 
 function formatTrainData(data) {
     var csvRow = [];
@@ -59,9 +64,9 @@ function formatTrainData(data) {
     var train = {
         train_index: csvRow[0],
         countDate: csvRow[1],
-        trainLine: +csvRow[2],
+        trainLine: csvRow[2],
         trainNo: csvRow[3],
-        teamLeader: csvRow[4],
+        teamLeader: +csvRow[4],
         numCars: csvRow[5],
         crewList: csvRow[6],
         countComments: csvRow[7]
