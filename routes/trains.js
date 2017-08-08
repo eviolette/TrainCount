@@ -20,9 +20,24 @@ var storage = multer.diskStorage({ //multers disk storage settings
 });
 
 
-var upload = multer({storage: storage}).single('trainraw');
 
-router.post('/upload', function(req, res, next) {
+
+router.post('/uploadtrainraw', function(req, res, next) {
+    var upload = multer({storage: storage}).single('trainraw');
+    var path = '';
+    upload(req, res, function (err) {
+        if (err) {
+            console.log(err);
+            return res.status(422).send('an Error Occurred');
+        }
+
+        path = req.file.path;
+        return res.send('Upload Completed for ' + path);
+    })
+});
+router.post('/uploadcounters', function(req, res, next) {
+    Train.updateTrain();
+    var upload = multer({storage: storage}).single('counters');
     var path = '';
     upload(req, res, function (err) {
         if (err) {
@@ -40,8 +55,9 @@ router.get('/getnumberofcars/:id', function (req, res, next) {
     var index = req.params.id;
     Train.findOne({'train_index' : index}, function (err, found) {
         if (found) {
-            console.log(found.numCars);
             res.json({numCars: found.numCars});
+        } else {
+            res.json({numCars: 100});
         }
     });
 });
