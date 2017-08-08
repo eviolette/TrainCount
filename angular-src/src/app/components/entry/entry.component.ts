@@ -87,7 +87,7 @@ export class EntryComponent implements OnInit {
              if (res.success) {
                console.log('pass');
                if (this.stations[i]) {
-                 this.authService.getOnOffCounts(this.paramHeader + this.stations[i].replace(/\//g, '%2F')).subscribe((res) => {
+                 this.authService.getOnOffCounts(this.paramHeader + this.stations[i].replace(/\//g, '%2F').replace(/,/g, '%2C')).subscribe((res) => {
                    if (res.success) {
                      this.oncounts[i] = res.onCount;
                      //console.log(this.oncounts);
@@ -101,7 +101,7 @@ export class EntryComponent implements OnInit {
                }
              } else {
                  if (this.stations[i]) {
-                   this.authService.getOnOffCounts(this.paramHeader.substring(0, 7) + "_01" + this.stations[i].replace(/\//g, '%2F')).subscribe((res) => {
+                   this.authService.getOnOffCounts(this.paramHeader.substring(0, 7) + "_01" + this.stations[i].replace(/\//g, '%2F').replace(/,/g, '%2C')).subscribe((res) => {
                      if (res.success) {
                        this.oncounts[i] = 0;
                        console.log(this.oncounts);
@@ -220,7 +220,7 @@ export class EntryComponent implements OnInit {
   }
 
   finished() {
-    this.router.navigate(['/export']);
+    this.router.navigate(['/home']);
   }
 
 

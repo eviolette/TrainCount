@@ -40,7 +40,9 @@ const trainDataSchema = mongoose.Schema({
 const Train = module.exports = mongoose.model('Train', trainDataSchema);
 
 module.exports.updateTrain = function () {
-    Train.remove({}, callback);
+    Train.remove({}, function(err, removed) {
+        if (err) console.log(err);
+    });
     csv.fromStream(stream, {headers:true}, {ignoreEmpty: false})
         .on('data', function (data) {
             //console.log(data);

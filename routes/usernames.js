@@ -1,10 +1,10 @@
 /**
- * Created by eviolette on 7/20/17.
+ * Created by eviolette on 8/8/17.
  */
 
 var express = require('express');
 var router = express.Router();
-var Train = require('../models/train');
+var Username = require('../models/username');
 var config = require('../config/database');
 var mongoose = require('mongoose');
 
@@ -19,12 +19,9 @@ var storage = multer.diskStorage({ //multers disk storage settings
     }
 });
 
-
-
-
-router.post('/uploadtrainraw', function(req, res, next) {
-    Train.updateTrain();
-    var upload = multer({storage: storage}).single('trainraw');
+router.post('/uploadusers', function(req, res, next) {
+    Username.updateUsername();
+    var upload = multer({storage: storage}).single('userlist');
     var path = '';
     upload(req, res, function (err) {
         if (err) {
@@ -37,18 +34,4 @@ router.post('/uploadtrainraw', function(req, res, next) {
     })
 });
 
-
-router.get('/getnumberofcars/:id', function (req, res, next) {
-    console.log(req.params.id);
-    var index = req.params.id;
-    Train.findOne({'train_index' : index}, function (err, found) {
-        if (found) {
-            res.json({numCars: found.numCars});
-        } else {
-            res.json({numCars: 100});
-        }
-    });
-});
-
 module.exports = router;
-

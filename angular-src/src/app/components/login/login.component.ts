@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.authService.authenticateUser(user).subscribe(data => {
       if(data.success){
         this.authService.storeUserData(data.token, data.user);
-        alert('Logged in');
+        //alert('Logged in');
         this.router.navigate(['/home']);
       } else {
         alert('Incorrect Password');

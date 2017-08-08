@@ -1,10 +1,6 @@
-/**
- * Created by eviolette on 7/20/17.
- */
-
 var express = require('express');
 var router = express.Router();
-var Train = require('../models/train');
+var Counter = require('../models/counter');
 var config = require('../config/database');
 var mongoose = require('mongoose');
 
@@ -19,12 +15,9 @@ var storage = multer.diskStorage({ //multers disk storage settings
     }
 });
 
-
-
-
-router.post('/uploadtrainraw', function(req, res, next) {
-    Train.updateTrain();
-    var upload = multer({storage: storage}).single('trainraw');
+router.post('/uploadcounters', function(req, res, next) {
+    Counter.updateCounter();
+    var upload = multer({storage: storage}).single('counters');
     var path = '';
     upload(req, res, function (err) {
         if (err) {
@@ -37,18 +30,4 @@ router.post('/uploadtrainraw', function(req, res, next) {
     })
 });
 
-
-router.get('/getnumberofcars/:id', function (req, res, next) {
-    console.log(req.params.id);
-    var index = req.params.id;
-    Train.findOne({'train_index' : index}, function (err, found) {
-        if (found) {
-            res.json({numCars: found.numCars});
-        } else {
-            res.json({numCars: 100});
-        }
-    });
-});
-
 module.exports = router;
-

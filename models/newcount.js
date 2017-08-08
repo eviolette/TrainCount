@@ -81,8 +81,8 @@ function formatNewCountData(data) {
     var countRow = {
         trainStationCoachIndex: csvRow[0],
         trainIndex: csvRow[1],
-        stationCode: +csvRow[2],
-        stationName: csvRow[3],
+        stationCode: csvRow[2],
+        stationName: csvRow[3].replace(/,/g, '_').replace(/[\u2018\u2019\u201C\u201D]/g, '"'),
         stationTime: csvRow[4],
         trainCoachIndex: csvRow[5],
         onCount: 0,

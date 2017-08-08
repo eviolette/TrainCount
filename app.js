@@ -26,12 +26,13 @@ mongoose.connection.on('error', function(err) {
 
 
 
-//var index = require('./routes/index');
+var counters = require('./routes/counters');
 var users = require('./routes/users');
 var lines = require('./routes/lines');
 var counts = require('./routes/counts');
 var trains = require('./routes/trains');
 var newcounts = require('./routes/newcounts');
+var usernames = require('./routes/usernames');
 
 var app = express();
 
@@ -66,6 +67,8 @@ app.use('/lines', lines);
 app.use('/counts', counts);
 app.use('/trains', trains);
 app.use('/newcounts', newcounts);
+app.use('/counters', counters);
+app.use('/usernames', usernames);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
