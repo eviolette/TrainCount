@@ -3,6 +3,8 @@ import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 const URLTrainRaw = 'http://localhost:3000/trains/uploadtrainraw';
 const URLCounters = 'http://localhost:3000/counters/uploadcounters';
 const URLUsers = 'http://localhost:3000/usernames/uploadusers';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +18,29 @@ export class UtilitiesComponent implements OnInit {
     private uploader2: FileUploader = new FileUploader({url: URLCounters, itemAlias: 'counters'});
     private uploader3: FileUploader = new FileUploader({url: URLUsers, itemAlias: 'userlist'});
 
+    show: boolean = false;
+
+    constructor(private authService: AuthService,
+              private router: Router) { }
+
   ngOnInit() {
+
+    this.authService.getProfile().subscribe(
+      profile => {
+        this.authService.isAdmin(profile.user.username).subscribe((res) => {
+          console.log(res);
+          if (res.success) {
+            this.show = true;
+          } else {
+            this.show = false;}
+        })
+      },
+      err => {
+        console.log(err);
+        return false;
+      }
+    );
+
     //override the onAfterAddingfile property of the uploader so it doesn't authenticate with //credentials.
     this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };
     this.uploader2.onAfterAddingFile = (file)=> { file.withCredentials = false; };

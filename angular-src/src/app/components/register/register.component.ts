@@ -40,16 +40,24 @@ export class RegisterComponent implements OnInit {
       return false;
     }
 
-    this.authService.registerUser(user).subscribe(data => {
-      if(data.success) {
-        alert('You are now registered.');
-        //window.location.replace('/login');
-        this.router.navigate(['/login']);
+    this.authService.checkUser(user.email).subscribe((data) => {
+      if (data.success) {
+        this.authService.registerUser(user).subscribe(data => {
+          if(data.success) {
+            alert('You are now registered.');
+            //window.location.replace('/login');
+            this.router.navigate(['/login']);
+          } else {
+            alert('Registration failed');
+            this.router.navigate(['/register']);
+          }
+        })
       } else {
-        alert('Registration failed');
-        this.router.navigate(['/register']);
+        alert('Email not on the approved list.');
       }
-    })
+    });
+
+
   }
 
 

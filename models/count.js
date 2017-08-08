@@ -103,7 +103,7 @@ function formatData(data, type) {
         for (var stationIndex = 0; stationIndex < count; stationIndex++) {
             rows.push({
                 dept_time: csvRow[stationIndex + DEPT_OFFSET + STATION_OFFSET],
-                station: csvRow[stationIndex + STATION_OFFSET],
+                station: csvRow[stationIndex + STATION_OFFSET].replace(/,/g, '_').replace(/[\u2018\u2019\u201C\u201D]/g, '"'),
                 cars: []
             })
         }
@@ -111,7 +111,7 @@ function formatData(data, type) {
         for (var stationIndex = 0; stationIndex < count; stationIndex++) {
             rows.push({
                 dept_time: csvRow[stationIndex + DEPT_OFFSET_ELEC + STATION_OFFSET],
-                station: csvRow[stationIndex + STATION_OFFSET],
+                station: csvRow[stationIndex + STATION_OFFSET].replace(/,/g, '_').replace(/[\u2018\u2019\u201C\u201D]/g, '"'),
                 cars: []
             })
         }

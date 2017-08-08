@@ -80,8 +80,8 @@ function formatTrainData(data) {
         countDate: csvRow[1],
         trainLine: csvRow[2],
         trainNo: csvRow[3],
-        teamLeader: +csvRow[4],
-        numCars: csvRow[5],
+        teamLeader: csvRow[4],
+        numCars: +csvRow[5],
         crewList: csvRow[6],
         countComments: csvRow[7]
     };

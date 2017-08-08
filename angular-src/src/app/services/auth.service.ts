@@ -139,6 +139,22 @@ export class AuthService {
       .map(res => res.json());
   };
 
+  // Username Methods
+
+  isAdmin(username) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/usernames/isadmin/' + username, {headers: headers})
+      .map(res => res.json());
+  }
+
+  checkUser(email) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/usernames/approvedemail/' + email, {headers: headers})
+      .map(res => res.json());
+  }
+
 
   // Export Methods
 

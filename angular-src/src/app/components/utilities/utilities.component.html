@@ -1,6 +1,7 @@
 <h1>
   Utilities
 </h1>
+<body *ngIf=show>
 
 <!-- File input for the file-upload plugin, with special ng2-file-upload directive called ng2FileSelect -->
 <input type="file" accept=".csv" name="trainraw" ng2FileSelect [uploader]="uploader" />
@@ -24,3 +25,4 @@
   Upload List Of Accepted Users CSV File
 </button>
 
+</body>

@@ -34,4 +34,26 @@ router.post('/uploadusers', function(req, res, next) {
     })
 });
 
+router.get('/isadmin/:id', function (req, res, next) {
+   var username = req.params.id;
+   Username.findOne({user: username}, function (err, found) {
+       if (found) {
+           res.json({success : found.isAdmin});
+       } else {
+           res.json({success : false});
+       }
+   })
+});
+
+router.get('/approvedemail/:id', function (req, res, next) {
+    var email = req.params.id;
+    Username.findOne({email: email}, function (err, found) {
+        if (found) {
+            res.json({success : true});
+        } else {
+            res.json({success : false});
+        }
+    })
+});
+
 module.exports = router;
