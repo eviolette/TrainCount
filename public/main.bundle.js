@@ -46,13 +46,13 @@ var ValidateService = (function () {
         //console.log('Bout to check');
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.get('http://localhost:3000/newcounts/lineexists/' + linePair, { headers: headers })
+        return this.http.get('newcounts/lineexists/' + linePair, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     ValidateService.prototype.checkCounterId = function (counter) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.get('http://localhost:3000/counters/checkid/' + counter, { headers: headers })
+        return this.http.get('counters/checkid/' + counter, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     ValidateService = __decorate([
@@ -185,7 +185,7 @@ var AuthService = (function () {
     AuthService.prototype.getOnOffCounts = function (indexStation) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.get('http://localhost:3000/newcounts/onoffs/' + indexStation, { headers: headers })
+        return this.http.get('newcounts/onoffs/' + indexStation, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     AuthService.prototype.updateCount = function (count) {
@@ -1422,7 +1422,7 @@ module.exports = "<h2>Input Count Data</h2>\n<h4>{{lineHeader}}</h4>\n<h5>{{trai
 /***/ 743:
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Export Count Data</h1>\n<body>\n  <div class=\"container\">\n    <a href=\"http://localhost:3000/newcounts/exportcount\" class=\"btn btn-primary\">Export</a>\n    <!--\n    <form (submit)=\"exportCounts()\" >\n      <input type=\"submit\" class=\"btn btn-primary\" value=\"Export\">\n    </form>\n    -->\n  </div>\n</body>\n"
+module.exports = "<h1>Export Count Data</h1>\n<body>\n  <div class=\"container\">\n    <a href=\"/newcounts/exportcount\" class=\"btn btn-primary\">Export</a>\n    <!--\n    <form (submit)=\"exportCounts()\" >\n      <input type=\"submit\" class=\"btn btn-primary\" value=\"Export\">\n    </form>\n    -->\n  </div>\n</body>\n"
 
 /***/ }),
 
