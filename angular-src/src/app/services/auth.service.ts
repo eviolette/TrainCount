@@ -118,7 +118,7 @@ export class AuthService {
   getOnOffCounts(indexStation) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/newcounts/onoffs/' + indexStation, {headers: headers})
+    return this.http.get('newcounts/onoffs/' + indexStation, {headers: headers})
       .map(res => res.json());
   }
 
