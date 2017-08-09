@@ -4,7 +4,7 @@
 
 var fs = require('fs');
 var csv = require('fast-csv');
-var stream = fs.createReadStream('/users/eviolette/Downloads/trainstationcoachcount.csv');
+var stream = fs.createReadStream('./referencefiles/trainstationcoachcount.csv');
 var mongoose = require('mongoose');
 var config = require('../config/database');
 var mongooseToCsv = require('mongoose-to-csv');

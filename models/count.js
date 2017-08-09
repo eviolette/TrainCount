@@ -4,8 +4,8 @@
 
 var fs = require('fs');
 var csv = require('fast-csv');
-var stream = fs.createReadStream('/users/eviolette/Downloads/gtfs.csv');
-var elecstream = fs.createReadStream('/users/eviolette/Downloads/gtfsELEC.csv');
+var stream = fs.createReadStream('./referencefiles/gtfs.csv');
+var elecstream = fs.createReadStream('./referencefiles/gtfsELEC.csv');
 var mongoose = require('mongoose');
 
 var config = require('../config/database');
