@@ -1184,9 +1184,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var URLTrainRaw = 'http://localhost:3000/trains/uploadtrainraw';
-var URLCounters = 'http://localhost:3000/counters/uploadcounters';
-var URLUsers = 'http://localhost:3000/usernames/uploadusers';
+var URLTrainRaw = 'trains/uploadtrainraw';
+var URLCounters = 'counters/uploadcounters';
+var URLUsers = 'usernames/uploadusers';
 
 
 var UtilitiesComponent = (function () {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
-const URLTrainRaw = 'http://localhost:3000/trains/uploadtrainraw';
-const URLCounters = 'http://localhost:3000/counters/uploadcounters';
-const URLUsers = 'http://localhost:3000/usernames/uploadusers';
+const URLTrainRaw = 'trains/uploadtrainraw';
+const URLCounters = 'counters/uploadcounters';
+const URLUsers = 'usernames/uploadusers';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
