@@ -36,6 +36,10 @@ var usernames = require('./routes/usernames');
 
 var app = express();
 
+// Port Number
+const port = process.env.PORT || 3000;
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -94,6 +98,6 @@ app.get('/', function (req, res) {
     res.send('hi')
 });
 
-app.listen(3000, function () {
+app.listen(port, function () {
     console.log('Website listening on port 3000!')
 });

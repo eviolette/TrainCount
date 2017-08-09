@@ -47,7 +47,12 @@ export class HomeComponent implements OnInit {
     this.idStr = line.train_line + "_" + line.train_num + "_" + this.assignedCarFormatter(line.assigned_car);
     this.linePair = line.train_line + "_" + line.train_num;
 
-     if (this.validateLine(line)) {
+    this.validateService.checkCounterId(line.counter_id + "_" + line.counter_name).subscribe((res) => {
+      if (!res.success) {
+        alert(res.msg);
+      }
+    });
+    if (this.validateLine(line)) {
        //console.log("pass");
        this.validateService.checkTrainNumber(this.linePair).subscribe(data => {
          if (!data.success) {
@@ -75,8 +80,10 @@ export class HomeComponent implements OnInit {
       return "0" + trainnum;
     } else if (trainnum.length == 2) {
       return "00" + trainnum;
+    } else if (trainnum.length == 1) {
+      return "000" + trainnum;
     } else {
-      return trainnum;
+      return trainnum + "";
     }
   }
 
@@ -87,6 +94,11 @@ export class HomeComponent implements OnInit {
 
   validateLine(line) {
     const linePair = line.train_line + "_" + line.train_num;
+
+    if(line.train_num.length > 4) {
+      alert('Train Number is too long');
+      return false;
+    }
 
     if (typeof line.date == "undefined") {
       alert('Enter a Date');

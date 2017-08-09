@@ -22,10 +22,17 @@ export class ValidateService {
 
 
   checkTrainNumber(linePair) {
-    console.log('Bout to check');
+    //console.log('Bout to check');
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.get('http://localhost:3000/newcounts/lineexists/' + linePair, {headers: headers})
+      .map(res => res.json());
+  }
+
+  checkCounterId(counter) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/counters/checkid/' + counter, {headers: headers})
       .map(res => res.json());
   }
 

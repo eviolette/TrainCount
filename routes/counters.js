@@ -30,4 +30,23 @@ router.post('/uploadcounters', function(req, res, next) {
     })
 });
 
+router.get('/checkid/:id', function (req, res, next) {
+   var counterarr =  req.params.id.split('_');
+   var counterid = counterarr[0];
+   var countername = counterarr[1];
+   console.log(counterid);
+   console.log(countername);
+   Counter.findOne({counter_id : counterid}, function (err, entry) {
+       if (entry) {
+           if (entry.counter_name === countername) {
+               res.json({success: true});
+           } else {
+               res.json({success: false, msg: 'Warning: Counter Name does not match ID; Name is supposed to be' + entry.counter_name});
+           }
+       } else {
+           res.json({success: false, msg: 'Warning: Counter ID not found'});
+       }
+   })
+});
+
 module.exports = router;
