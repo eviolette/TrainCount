@@ -24,14 +24,14 @@ export class AuthService {
   registerUser(user) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/users/register', user, {headers: headers})
+    return this.http.post('users/register', user, {headers: headers})
       .map(res=>res.json());
   }
 
   authenticateUser(user){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/users/authenticate', user,{headers: headers})
+    return this.http.post('users/authenticate', user,{headers: headers})
       .map(res => res.json());
   }
 
@@ -40,7 +40,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/users/profile',{headers: headers})
+    return this.http.get('users/profile',{headers: headers})
       .map(res => res.json());
   }
 
@@ -70,14 +70,14 @@ export class AuthService {
   registerLine(line) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/lines/register', line, {headers: headers})
+    return this.http.post('lines/register', line, {headers: headers})
       .map(res=>res.json());
   }
 
   getLine() {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/lines/lineInfo',{headers: headers})
+    return this.http.get('lines/lineInfo',{headers: headers})
       .map(res => res.json());
   }
 
@@ -89,7 +89,7 @@ export class AuthService {
     params.set('line', lineNum);
     let options = new RequestOptions();
     options.search = params;
-    return this.http.get('http://localhost:3000/counts/departures/' + lineNum, {headers: headers})
+    return this.http.get('counts/departures/' + lineNum, {headers: headers})
       .map(res => res.json())
       .catch((err) => {
         console.log(err);
@@ -100,7 +100,7 @@ export class AuthService {
   getStationInfo(lineNum) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/counts/stations/' + lineNum, {headers: headers})
+    return this.http.get('counts/stations/' + lineNum, {headers: headers})
       .map(res => res.json())
       .catch((err) => {
         console.log(err);
@@ -111,7 +111,7 @@ export class AuthService {
   findTrainCoach(coach) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/newcounts/trainexists/' + coach, {headers: headers})
+    return this.http.get('newcounts/trainexists/' + coach, {headers: headers})
       .map(res => res.json());
   }
 
@@ -126,7 +126,7 @@ export class AuthService {
   updateCount(count) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/newcounts/updatecount', count, {headers: headers})
+    return this.http.post('newcounts/updatecount', count, {headers: headers})
       .map(res=>res.json());
   }
 
@@ -135,7 +135,7 @@ export class AuthService {
   checkNumberOfCars(index) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/trains/getnumberofcars/' + index, {headers: headers})
+    return this.http.get('trains/getnumberofcars/' + index, {headers: headers})
       .map(res => res.json());
   };
 
@@ -144,14 +144,14 @@ export class AuthService {
   isAdmin(username) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/usernames/isadmin/' + username, {headers: headers})
+    return this.http.get('usernames/isadmin/' + username, {headers: headers})
       .map(res => res.json());
   }
 
   checkUser(email) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/usernames/approvedemail/' + email, {headers: headers})
+    return this.http.get('usernames/approvedemail/' + email, {headers: headers})
       .map(res => res.json());
   }
 
@@ -160,7 +160,7 @@ export class AuthService {
 
   exportCounts() {
     let headers = new Headers();
-    return this.http.get('http://localhost:3000/newcounts/exportcount', {headers: headers})
+    return this.http.get('newcounts/exportcount', {headers: headers})
   }
 
 }
