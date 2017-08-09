@@ -9,6 +9,14 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 var config = require('./config/database');
 
+var options = {server: {
+    socketOptions: {
+      //  keepAlive: 9999999999,
+        //connectTimeoutMS: 100,
+        socketTimeoutMS: 100
+    }
+}};
+
 mongoose.connect(config.database);
 
 
