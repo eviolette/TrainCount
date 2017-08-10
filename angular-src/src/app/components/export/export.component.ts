@@ -15,7 +15,7 @@ export class ExportComponent implements OnInit {
 
   exportCounts() {
     this.authService.exportCounts().subscribe(data => {
-        console.log(data);
+       // console.log(data);
       }
     );
   }

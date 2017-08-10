@@ -28,7 +28,7 @@ export class UtilitiesComponent implements OnInit {
     this.authService.getProfile().subscribe(
       profile => {
         this.authService.isAdmin(profile.user.username).subscribe((res) => {
-          console.log(res);
+        //  console.log(res);
           if (res.success) {
             this.show = true;
           } else {
@@ -36,7 +36,7 @@ export class UtilitiesComponent implements OnInit {
         })
       },
       err => {
-        console.log(err);
+   //     console.log(err);
         return false;
       }
     );
@@ -48,13 +48,13 @@ export class UtilitiesComponent implements OnInit {
     //overide the onCompleteItem property of the uploader so we are
     //able to deal with the server response.
     this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
-      console.log("ImageUpload:uploaded:", item, status, response);
+ //     console.log("ImageUpload:uploaded:", item, status, response);
     };
     this.uploader2.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
-      console.log("ImageUpload2:uploaded:", item, status, response);
+ //     console.log("ImageUpload2:uploaded:", item, status, response);
     };
     this.uploader3.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
-      console.log("ImageUpload3:uploaded:", item, status, response);
+ //     console.log("ImageUpload3:uploaded:", item, status, response);
     };
   }
 

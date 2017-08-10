@@ -51,7 +51,7 @@ export class EntryComponent implements OnInit {
     });
 
     this.authService.checkNumberOfCars(this.paramHeader.substring(0,7)).subscribe((res) => {
-      console.log(res.numCars);
+      //console.log(res.numCars);
       if (res.numCars < this.lineNumDeformatter(this.coachIndex)) {
         alert('Warning: Number of Cars is Listed as ' + res.numCars);
       }
@@ -85,7 +85,7 @@ export class EntryComponent implements OnInit {
            this.stations.push(this.station_times[i]);
            this.authService.findTrainCoach(this.paramHeader).subscribe((res) => {
              if (res.success) {
-               console.log('pass');
+              // console.log('pass');
                if (this.stations[i]) {
                  this.authService.getOnOffCounts(this.paramHeader + this.stations[i].replace(/\//g, '%2F').replace(/,/g, '%2C')).subscribe((res) => {
                    if (res.success) {
@@ -93,9 +93,9 @@ export class EntryComponent implements OnInit {
                      //console.log(this.oncounts);
                      this.offcounts[i] = res.offCount;
                      this.comments[i] = res.comments;
-                     console.log(res.comments);
+                     //console.log(res.comments);
                      this.stationcodes[i] = res.stationCode;
-                     console.log(this.stationcodes);
+                    // console.log(this.stationcodes);
                    }
                  })
                }
@@ -107,7 +107,7 @@ export class EntryComponent implements OnInit {
                        console.log(this.oncounts);
                        this.offcounts[i] = 0;
                        this.stationcodes[i] = res.stationCode;
-                       console.log(this.stationcodes);
+                   //    console.log(this.stationcodes);
                      }
                    })
                  }
@@ -169,7 +169,7 @@ export class EntryComponent implements OnInit {
         alert('Error: Net Off Count is Less than 0 at ' + this.stations[i]);
         return false;
       }
-      console.log('No err');
+  //    console.log('No err');
     }
     return true;
 
@@ -207,7 +207,7 @@ export class EntryComponent implements OnInit {
         console.log(count);
 
         if (typeof this.comments[i] == 'undefined') count.comments = '';
-        console.log(count.comments);
+   //     console.log(count.comments);
 
         if (!(count.stationTime == '-' || count.onCount == null || count.offCount == null)) {
           //console.log(JSON.stringify(count));
