@@ -25,9 +25,6 @@ const UsernameSchema = mongoose.Schema({
 const Username = module.exports = mongoose.model('Username', UsernameSchema);
 
 module.exports.updateUsername = function () {
-    Username.remove({}, function(err, removed) {
-        if (err) console.log(err);
-    });
     csv.fromStream(stream, {headers:true}, {ignoreEmpty: false})
         .on('data', function (data) {
             //console.log(data);

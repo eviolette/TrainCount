@@ -22,9 +22,6 @@ const CounterSchema = mongoose.Schema({
 const Counter = module.exports = mongoose.model('Counter', CounterSchema);
 
 module.exports.updateCounter = function () {
-    Counter.remove({}, function(err, removed) {
-        if (err) console.log(err);
-    });
     csv.fromStream(stream, {headers:true}, {ignoreEmpty: false})
         .on('data', function (data) {
             //console.log(data);
