@@ -20,7 +20,14 @@ export class AuthService {
   }
 
 
+  // AUTH SERVICE: PERFORMS ALL HTTP REQUESTS TO ROUTES, WHICH THEN QUERY DATABASE COLLECTIONS. AUTHSERVICE MAPS ROUTE
+  // RESPONSES TO JSON OBJECTS, THEN RETURNS THEM TO THE ANGULAR COMPONENTS THAT CALL THE AUTHSERVICE METHOD TO BEGIN
+  // WITH
+
+
+
   // User Registration Methods
+
   registerUser(user) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -74,12 +81,6 @@ export class AuthService {
       .map(res=>res.json());
   }
 
-  getLine() {
-    let headers = new Headers();
-    headers.append('Content-Type','application/json');
-    return this.http.get('lines/lineInfo',{headers: headers})
-      .map(res => res.json());
-  }
 
   // Count Methods
   getDeptInfo(lineNum) {

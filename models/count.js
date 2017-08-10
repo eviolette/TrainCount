@@ -49,11 +49,13 @@ const countSchema = mongoose.Schema({
 // attach Schema to Model
 var Count = module.exports = mongoose.model('Count', countSchema);
 
-
+// Constants
 
 const TRAIN_DIR_COL = 0, TRAIN_LINE_COL = 1, TRAIN_ID_COL = 2, STATION_OFFSET = 4, MAX_COUNT = 26, DEPT_OFFSET = 26;
 const MAX_COUNT_ELEC = 34, DEPT_OFFSET_ELEC = 34;
 
+
+// If nothing found in the database, populate it via gtfs data
 Count.find({}, function (err, found) {
    if (!found.length) {
        //read in CSV as stream row by row
@@ -87,6 +89,8 @@ Count.find({}, function (err, found) {
 
 
 function formatData(data, type) {
+    // formats data based on gtfs csv file
+
     var csvRow = [];
 
     for (var i in data)

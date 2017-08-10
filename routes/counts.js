@@ -10,7 +10,7 @@ var jwt = require('jsonwebtoken');
 var config = require('../config/database');
 var mongoose = require('mongoose');
 
-// Count
+// return departure information by querying Count model
 router.get('/departures/:id', function(req, res, next) {
     var trainid = +(req.params.id.substring(2));
     var line = +req.params.id.substring(0,2);
@@ -30,6 +30,8 @@ router.get('/departures/:id', function(req, res, next) {
 
     });
 });
+
+// return station information by querying Count model
 router.get('/stations/:id', function(req, res, next) {
     var trainid = +(req.params.id.substring(2));
     var line = +req.params.id.substring(0,2);
@@ -48,6 +50,8 @@ router.get('/stations/:id', function(req, res, next) {
         }
     });
 });
+
+// Return line String from line id
 
 function formatIntoLine(train) {
     var lineid = train;

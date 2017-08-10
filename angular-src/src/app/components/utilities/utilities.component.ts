@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 })
 export class UtilitiesComponent implements OnInit {
 
+    // Instantiate three FileUploaders for each of the three docs, map them to a router url. itemAlias is their name.
+
     private uploader: FileUploader = new FileUploader({url: URLTrainRaw, itemAlias: 'trainraw'});
     private uploader2: FileUploader = new FileUploader({url: URLCounters, itemAlias: 'counters'});
     private uploader3: FileUploader = new FileUploader({url: URLUsers, itemAlias: 'userlist'});
@@ -24,6 +26,8 @@ export class UtilitiesComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+
+    // authService method to check if a user is an admin or not
 
     this.authService.getProfile().subscribe(
       profile => {
@@ -40,6 +44,8 @@ export class UtilitiesComponent implements OnInit {
         return false;
       }
     );
+
+    // Uploading the files
 
     //override the onAfterAddingfile property of the uploader so it doesn't authenticate with //credentials.
     this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };

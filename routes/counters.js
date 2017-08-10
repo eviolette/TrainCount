@@ -4,6 +4,9 @@ var Counter = require('../models/counter');
 var config = require('../config/database');
 var mongoose = require('mongoose');
 
+
+// Store Counters CSV File Config
+
 var multer = require('multer');
 var DIR = './uploads/';
 var storage = multer.diskStorage({ //multers disk storage settings
@@ -14,6 +17,9 @@ var storage = multer.diskStorage({ //multers disk storage settings
         cb(null, file.fieldname);
     }
 });
+
+// Store Counters CSV File
+
 
 router.post('/uploadcounters', function(req, res, next) {
     Counter.updateCounter();
@@ -29,6 +35,8 @@ router.post('/uploadcounters', function(req, res, next) {
         return res.send('Upload Completed for ' + path);
     })
 });
+
+// Query the db for the counter id
 
 router.get('/checkid/:id', function (req, res, next) {
    var counterarr =  req.params.id.split('_');

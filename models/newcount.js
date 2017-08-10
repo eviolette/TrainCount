@@ -9,6 +9,8 @@ var mongoose = require('mongoose');
 var config = require('../config/database');
 var mongooseToCsv = require('mongoose-to-csv');
 
+// NewCount Schema
+
 var newCountSchema = new mongoose.Schema({
     trainStationCoachIndex: {
         type: String
@@ -39,6 +41,8 @@ var newCountSchema = new mongoose.Schema({
     }
 }, {strict : true});
 
+// Plugin for export
+
 newCountSchema.plugin(mongooseToCsv, {
     headers: 'TrainStationCoachIndex TrainIndex StationCode StationName StationTime TrainCoachIndex OnCount OffCount StationComment',
     constraints: {
@@ -55,6 +59,8 @@ newCountSchema.plugin(mongooseToCsv, {
 });
 
 var NewCount = module.exports = mongoose.model('NewCount', newCountSchema);
+
+// Populates db from csv if not data not found
 
 NewCount.find({}, function(err, found) {
     if (!found.length) {
@@ -99,6 +105,8 @@ function addNewCountToCollection(data) {
     });
 }
 
+// Appends the NewCount to the Database
+
 module.exports.updateCount = function (newcount) {
     NewCount.findOneAndUpdate({'trainCoachIndex' : newcount.trainCoachIndex, 'stationName' : newcount.stationName},
         {
@@ -125,6 +133,8 @@ module.exports.updateCount = function (newcount) {
             console.log(count);
         });
 };
+
+// Exports CSV
 
 module.exports.exportData = function(output) {
     NewCount.findAndStreamCsv({})

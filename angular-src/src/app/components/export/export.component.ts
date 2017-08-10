@@ -13,6 +13,8 @@ export class ExportComponent implements OnInit {
   ngOnInit() {
   }
 
+  //Export Link is clicked
+
   exportCounts() {
     this.authService.exportCounts().subscribe(data => {
        // console.log(data);

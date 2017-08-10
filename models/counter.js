@@ -21,6 +21,8 @@ const CounterSchema = mongoose.Schema({
 
 const Counter = module.exports = mongoose.model('Counter', CounterSchema);
 
+// Streams data from counters csv file
+
 module.exports.updateCounter = function () {
     csv.fromStream(stream, {headers:true}, {ignoreEmpty: false})
         .on('data', function (data) {
@@ -31,6 +33,8 @@ module.exports.updateCounter = function () {
             //console.log('done');
         });
 };
+
+// Streams data from counters csv file if nothing in the db
 
 Counter.find({}, function(err, found) {
     if (!found.length) {
@@ -58,6 +62,8 @@ function formatCounterData(data) {
     };
     return counter;
 }
+
+// Adds counter to the db
 
 function addCounterToCollection(data) {
     var counter = new Counter(data);

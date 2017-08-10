@@ -10,7 +10,7 @@ var config = require('../config/database');
 
 
 
-// Register
+// Register Line
 router.post('/register', function(req, res, next) {
     let newLine = new Line({
         date: req.body.date,

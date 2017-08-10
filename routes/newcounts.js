@@ -11,6 +11,8 @@ var path = require('path');
 var fs = require('fs');
 
 
+// Return onoffs information (along with stationcode) via querying the NewCount model
+
 router.get('/onoffs/:id', function(req, res, next) {
    //console.log('get registered');
    var train = req.params.id.substring(0, 10);
@@ -32,6 +34,8 @@ router.get('/onoffs/:id', function(req, res, next) {
    })
 });
 
+// Return stationcodes
+
 router.get('/stationtime/:id', function(req, res, next) {
     //console.log("Get registered");
     var station = req.params.id;
@@ -41,6 +45,9 @@ router.get('/stationtime/:id', function(req, res, next) {
         res.json({stationCode: entry['stationCode']})
     });
 });
+
+
+// Queries NewCount model to find if the train even exists
 
 router.get('/trainexists/:id', function (req, res, next) {
     var coach = req.params.id;
@@ -57,6 +64,9 @@ router.get('/trainexists/:id', function (req, res, next) {
     })
 });
 
+// Queries NewCount model to find if the line even exists
+
+
 router.get('/lineexists/:id', function (req, res, next) {
     var train = req.params.id;
     //console.log(train);
@@ -72,6 +82,7 @@ router.get('/lineexists/:id', function (req, res, next) {
     })
 });
 
+// Posts to NewCount db to update the count information
 
 router.post('/updatecount', function(req, res, next) {
     console.log('updating');
@@ -93,6 +104,9 @@ router.post('/updatecount', function(req, res, next) {
 
     res.json({success: true, msg:'Count Updated'});
 });
+
+// Calls NewCount export method, sends back to downlaod the csv file
+
 
 router.get('/exportcount', function (req, res, next) {
   console.log('attempting to download');

@@ -9,6 +9,8 @@ import { ValidateService } from '../../services/validate.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  // Instantiating variables
+
   date: String;
   counter_name: String;
   counter_id: Number;
@@ -22,6 +24,8 @@ export class HomeComponent implements OnInit {
   idStr: String = "";
   linePair: String;
 
+  // Passing imports through constructor
+
   constructor(private router: Router,
               private authService: AuthService,
               private validateService: ValidateService) { }
@@ -29,7 +33,11 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Submit Button is clicked
+
   onLineSubmit() {
+
+    // Creates JSON object for a line by getting the form data
 
     const line = {
       date: this.date,
@@ -47,13 +55,19 @@ export class HomeComponent implements OnInit {
     this.idStr = line.train_line + "_" + line.train_num + "_" + this.assignedCarFormatter(line.assigned_car);
     this.linePair = line.train_line + "_" + line.train_num;
 
+    // Calls validateservice.checkCounterId to query the database to check if counter id and names match, warn if not
+
     this.validateService.checkCounterId(line.counter_id + "_" + line.counter_name).subscribe((res) => {
       if (!res.success) {
         alert(res.msg);
       }
     });
     if (this.validateLine(line)) {
-       //console.log("pass");
+
+      // Calls validateService.checkTrainNumber with the line number and train number pair to see if this combination
+      // exists, if not, do not allow validation, if so, navigate to the entry page by passing the this linePair as a
+      // routing param
+
        this.validateService.checkTrainNumber(this.linePair).subscribe(data => {
          if (!data.success) {
            alert('Train Line and Train Number Combination Not Found');
@@ -75,6 +89,9 @@ export class HomeComponent implements OnInit {
 
   }
 
+  // String => String
+  // Formats train number based on entered number
+
   trainNumFormatter(trainnum) {
     if (trainnum.length == 3) {
       return "0" + trainnum;
@@ -87,10 +104,15 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // Number => String
+  // Formats assigned car based on entered number
+
   assignedCarFormatter(car) {
     if (car < 10) return "0" + car;
     return car;
   }
+
+  // Various form validations based on type errors, empty fields, etc.
 
   validateLine(line) {
     const linePair = line.train_line + "_" + line.train_num;

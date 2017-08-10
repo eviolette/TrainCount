@@ -42,6 +42,8 @@ export class EntryComponent implements OnInit {
 
   ngOnInit() {
 
+    // Formats incoming route parameters into usable line, trainnumber, and coachindex
+
     this.route.params.subscribe(params => {
       this.paramHeader = params['id'];
       this.lineHeader = "Line " + params['id'].substring(0,2);
@@ -49,6 +51,8 @@ export class EntryComponent implements OnInit {
       this.lineNum = this.lineNumDeformatter(params['id'].substring(3,7));
       this.coachIndex = params['id'].substring(8,10);
     });
+
+    // Calls the Authentication Service's checkNumberOfCars to return if the current coach index is larger than the number of cars
 
     this.authService.checkNumberOfCars(this.paramHeader.substring(0,7)).subscribe((res) => {
       //console.log(res.numCars);
@@ -58,25 +62,30 @@ export class EntryComponent implements OnInit {
     });
 
 
-
+    // Gets departure times from the authentication service, sends in line and train number
     this.authService.getDeptInfo(this.paramHeader.substring(0,2) + this.lineNum)
       .subscribe((res) => {
+      // If the train is found, populate the table with the response's departure times
         if (res.success) {
           this.depart_times = res.times;
           this.numTimes = Object.keys(this.depart_times).length;
           for (let i in this.depart_times) {
+            // Fill table iff the response's departure time is not an empty time
             if (this.depart_times[i] != "-") this.departures.push(this.depart_times[i]);
           }
           //console.log(this.depart_times);
           //console.log(this.departures);
         } else {
+          // Wrong train, navigate back to home
           alert('Train Not Found');
           this.router.navigate(['/home']);
         }
       });
 
+    // Gets station times from the authentication service, sends in line and train number
     this.authService.getStationInfo(this.paramHeader.substring(0,2) + this.lineNum)
       .subscribe((res) => {
+        // If the train is found, populate the table with the response's station times
       if (res.success) {
         this.station_times = res.stations;
         this.numStations = Object.keys(this.station_times).length;
@@ -85,8 +94,11 @@ export class EntryComponent implements OnInit {
            this.stations.push(this.station_times[i]);
            this.authService.findTrainCoach(this.paramHeader).subscribe((res) => {
              if (res.success) {
+               //Finds the coach by calling the authentication service's findTrainCoach(), then populates On Offs
               // console.log('pass');
                if (this.stations[i]) {
+                 // Calls AuthService Method getOnOffCounts, string => [Numbers]
+                 // Passes formatted station names and train information, populates onoff counts if they exist in the database
                  this.authService.getOnOffCounts(this.paramHeader + this.stations[i].replace(/\//g, '%2F').replace(/,/g, '%2C')).subscribe((res) => {
                    if (res.success) {
                      this.oncounts[i] = res.onCount;
@@ -100,6 +112,7 @@ export class EntryComponent implements OnInit {
                  })
                }
              } else {
+               // Train does not exist yet in the database, instead just populate onoffs with 0 values
                  if (this.stations[i]) {
                    this.authService.getOnOffCounts(this.paramHeader.substring(0, 7) + "_01" + this.stations[i].replace(/\//g, '%2F').replace(/,/g, '%2C')).subscribe((res) => {
                      if (res.success) {
@@ -122,11 +135,14 @@ export class EntryComponent implements OnInit {
 
   }
 
+  // String => Number
+  // Formats Line Number to a readable Integer
+
   lineNumDeformatter(str) {
     if (str.charAt(0) === "0") return +str.substring(1);
     return +str;
   }
-
+  // Increments the coach index
   coachIndexAdd(str) {
     if (str.charAt(0) === "0" && str.charAt(1) === "9") {
       return "10";
@@ -141,6 +157,8 @@ export class EntryComponent implements OnInit {
     }
   }
 
+  // Decrements the coach index
+
   coachIndexSub(str) {
     if (str === "10") {
       return "09";
@@ -154,6 +172,8 @@ export class EntryComponent implements OnInit {
       return "" + num;
     }
   }
+
+  // Iterates through the onoff arrays to check if any entry's difference with the previous entry is less than 0
 
   checkNetCounts() {
     this.netons[0] = +this.oncounts[0];
@@ -175,6 +195,8 @@ export class EntryComponent implements OnInit {
 
   }
 
+  // Navigates to the previous car
+
   getPreviousCar() {
     if(+this.coachIndex == 1) {
       alert("No Previous Car");
@@ -183,14 +205,20 @@ export class EntryComponent implements OnInit {
     }
   }
 
+  // Navigates to the next car
+
   getNextCar() {
     this.router.navigate(['/dummy', this.paramHeader.substring(0,7) + "_" + this.coachIndexAdd(this.coachIndex)]);
   }
+
+  // Submit Button is clicked
 
   onCountSubmit() {
     //console.log(this.stationcodes);
 
     if (this.checkNetCounts()) {
+
+      // For every departure, create a count object
 
       for (let i = 0; i < this.departures.length; i++) {
         const count = {
@@ -210,14 +238,16 @@ export class EntryComponent implements OnInit {
    //     console.log(count.comments);
 
         if (!(count.stationTime == '-' || count.onCount == null || count.offCount == null)) {
-          //console.log(JSON.stringify(count));
+
+          // Calls the authService method updateCount to post this count to the database
           this.authService.updateCount(count).subscribe();
-          //this.router.navigate(['/home']);
 
         }
       }
     }
   }
+
+  // Finished button is clicked, navigate back to home
 
   finished() {
     this.router.navigate(['/home']);
