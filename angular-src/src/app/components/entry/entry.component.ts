@@ -188,7 +188,7 @@ export class EntryComponent implements OnInit {
   }
 
   onCountSubmit() {
-    console.log(this.stationcodes);
+    //console.log(this.stationcodes);
 
     if (this.checkNetCounts()) {
 
