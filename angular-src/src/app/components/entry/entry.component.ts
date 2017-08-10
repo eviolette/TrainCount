@@ -104,7 +104,7 @@ export class EntryComponent implements OnInit {
                    this.authService.getOnOffCounts(this.paramHeader.substring(0, 7) + "_01" + this.stations[i].replace(/\//g, '%2F').replace(/,/g, '%2C')).subscribe((res) => {
                      if (res.success) {
                        this.oncounts[i] = 0;
-                       console.log(this.oncounts);
+                      // console.log(this.oncounts);
                        this.offcounts[i] = 0;
                        this.stationcodes[i] = res.stationCode;
                    //    console.log(this.stationcodes);
