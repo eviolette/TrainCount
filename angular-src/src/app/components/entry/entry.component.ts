@@ -115,7 +115,7 @@ export class EntryComponent implements OnInit {
            });
 
         }
-        console.log(this.station_times);
+      //  console.log(this.station_times);
       }
       });
 
@@ -204,7 +204,7 @@ export class EntryComponent implements OnInit {
           offCount: this.offcounts[i],
           comments: this.comments[i]
         };
-        console.log(count);
+        //console.log(count);
 
         if (typeof this.comments[i] == 'undefined') count.comments = '';
    //     console.log(count.comments);
