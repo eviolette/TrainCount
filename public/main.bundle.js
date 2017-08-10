@@ -534,7 +534,7 @@ var EntryComponent = (function () {
             _this.coachIndex = params['id'].substring(8, 10);
         });
         this.authService.checkNumberOfCars(this.paramHeader.substring(0, 7)).subscribe(function (res) {
-            console.log(res.numCars);
+            //console.log(res.numCars);
             if (res.numCars < _this.lineNumDeformatter(_this.coachIndex)) {
                 alert('Warning: Number of Cars is Listed as ' + res.numCars);
             }
@@ -564,7 +564,7 @@ var EntryComponent = (function () {
                     _this.stations.push(_this.station_times[i]);
                     _this.authService.findTrainCoach(_this.paramHeader).subscribe(function (res) {
                         if (res.success) {
-                            console.log('pass');
+                            // console.log('pass');
                             if (_this.stations[i]) {
                                 _this.authService.getOnOffCounts(_this.paramHeader + _this.stations[i].replace(/\//g, '%2F').replace(/,/g, '%2C')).subscribe(function (res) {
                                     if (res.success) {
@@ -572,9 +572,8 @@ var EntryComponent = (function () {
                                         //console.log(this.oncounts);
                                         _this.offcounts[i] = res.offCount;
                                         _this.comments[i] = res.comments;
-                                        console.log(res.comments);
+                                        //console.log(res.comments);
                                         _this.stationcodes[i] = res.stationCode;
-                                        console.log(_this.stationcodes);
                                     }
                                 });
                             }
@@ -587,7 +586,6 @@ var EntryComponent = (function () {
                                         console.log(_this.oncounts);
                                         _this.offcounts[i] = 0;
                                         _this.stationcodes[i] = res.stationCode;
-                                        console.log(_this.stationcodes);
                                     }
                                 });
                             }
@@ -650,7 +648,6 @@ var EntryComponent = (function () {
                 alert('Error: Net Off Count is Less than 0 at ' + this.stations[i]);
                 return false;
             }
-            console.log('No err');
         }
         return true;
     };
@@ -683,7 +680,7 @@ var EntryComponent = (function () {
                 console.log(count);
                 if (typeof this.comments[i] == 'undefined')
                     count.comments = '';
-                console.log(count.comments);
+                //     console.log(count.comments);
                 if (!(count.stationTime == '-' || count.onCount == null || count.offCount == null)) {
                     //console.log(JSON.stringify(count));
                     this.authService.updateCount(count).subscribe();
@@ -735,7 +732,7 @@ var ExportComponent = (function () {
     };
     ExportComponent.prototype.exportCounts = function () {
         this.authService.exportCounts().subscribe(function (data) {
-            console.log(data);
+            // console.log(data);
         });
     };
     ExportComponent = __decorate([
@@ -1064,7 +1061,7 @@ var ProfileComponent = (function () {
         this.authService.getProfile().subscribe(function (profile) {
             _this.user = profile.user;
         }, function (err) {
-            console.log(err);
+            //   console.log(err);
             return false;
         });
     };
@@ -1202,7 +1199,7 @@ var UtilitiesComponent = (function () {
         var _this = this;
         this.authService.getProfile().subscribe(function (profile) {
             _this.authService.isAdmin(profile.user.username).subscribe(function (res) {
-                console.log(res);
+                //  console.log(res);
                 if (res.success) {
                     _this.show = true;
                 }
@@ -1211,7 +1208,7 @@ var UtilitiesComponent = (function () {
                 }
             });
         }, function (err) {
-            console.log(err);
+            //     console.log(err);
             return false;
         });
         //override the onAfterAddingfile property of the uploader so it doesn't authenticate with //credentials.
@@ -1221,13 +1218,13 @@ var UtilitiesComponent = (function () {
         //overide the onCompleteItem property of the uploader so we are
         //able to deal with the server response.
         this.uploader.onCompleteItem = function (item, response, status, headers) {
-            console.log("ImageUpload:uploaded:", item, status, response);
+            //     console.log("ImageUpload:uploaded:", item, status, response);
         };
         this.uploader2.onCompleteItem = function (item, response, status, headers) {
-            console.log("ImageUpload2:uploaded:", item, status, response);
+            //     console.log("ImageUpload2:uploaded:", item, status, response);
         };
         this.uploader3.onCompleteItem = function (item, response, status, headers) {
-            console.log("ImageUpload3:uploaded:", item, status, response);
+            //     console.log("ImageUpload3:uploaded:", item, status, response);
         };
     };
     UtilitiesComponent = __decorate([
